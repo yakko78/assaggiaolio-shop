@@ -20,7 +20,7 @@
           <h3>Prezzo <%= number_to_currency(p.price) %></h3>
           <label for="quantity">Q.tà</label>
           <input type="number" name="quantity" value="1">
-          <button type="button" name="button" class="btn btn-primary">Aggiungi al carrello</button>
+          <%= button_to "Aggiungi al carrello", line_items_path(product_id: p), class: "btn btn-primary" %>
         </p>
 
       </div>
