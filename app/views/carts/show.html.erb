@@ -1,12 +1,9 @@
-<h1>Carrello</h1>
+<%= render @cart %>
 
-<p id="notice"><%= notice %></p>
-
-<ul>
-  <% @cart.line_items.each do |item| %>
-    <li><%= item.product.title %></li>
-  <% end %>
-</ul>
-
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%= link_to 'Back', carts_path %>
+<div class="container">
+  <div class="col-md-12">
+    <%= button_to "Continua gli acquisti", store_url, method: :get, class: "btn btn-primary pull-right" %>
+    
+    <%= button_to "Vai alla cassa", store_url, method: :get, class: "btn btn-primary pull-right" %>
+  </div>
+</div>

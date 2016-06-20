@@ -1,0 +1,14 @@
+  <h1>Carrello</h1>
+
+  <div class="col-md-12">
+    <table class="table">
+      <%= render(cart.line_items) %>
+      <tr>
+        <td colspan="3" style="text-align:right">Totale: <%= number_to_currency(cart.total_price) %></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-md-6">
+    <%= button_to "Svuota carrello", cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-primary" %>
+  </div>

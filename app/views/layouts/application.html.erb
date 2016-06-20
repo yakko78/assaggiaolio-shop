@@ -12,7 +12,15 @@
     <%= render('shared/navbar') %>
   </div>
 
-  <%= yield %>
+<div class="container">
+  <div class="col-md-8">
+    <%= yield %>
+  </div>
+  <div class="col-md-4" id="cart">
+    <%= render @cart unless @cart.nil? %>
+  </div>
+</div>
+
 
 </body>
 </html>
