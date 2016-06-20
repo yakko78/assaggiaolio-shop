@@ -11,18 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620082647) do
+ActiveRecord::Schema.define(version: 20160620095622) do
 
   create_table "products", force: :cascade do |t|
-    t.integer  "sku"
+    t.string   "sku"
     t.string   "title"
     t.text     "description"
-    t.decimal  "capacity"
+    t.decimal  "capacity_cl"
     t.decimal  "height"
     t.decimal  "diameter"
     t.decimal  "price"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.decimal  "capacity_floz"
   end
 
 end

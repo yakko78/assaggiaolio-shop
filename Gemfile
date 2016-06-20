@@ -37,6 +37,7 @@ gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'google-webfonts-rails'
 gem 'bootstrap_form'
 gem 'retina_tag', '~> 1.3', '>= 1.3.1'
+gem 'rails-i18n'
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1'

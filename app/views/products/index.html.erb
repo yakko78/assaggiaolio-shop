@@ -1,0 +1,30 @@
+<div class="container">
+  <% @products.each do |p| %>
+    <div class="row">
+      <div class="col-md-4">
+        foto qui
+      </div>
+      <div class="col-md-8">
+        <h1><%= p.title %></h1>
+        <p>
+          <%= p.description %>
+        </p>
+        <%= "Capacità: cl #{p.capacity_cl} (fl. oz. #{p.capacity_floz})" unless p.capacity_cl.nil? %><br>
+        Altezza: <%= p.height %><br>
+        Diametro: <%= p.diameter %><br>
+        Pippo: <%= session[:pippo] %>
+        <%= link_to "Richiedi info personalizzazione", "" %>
+
+
+        <p>
+          <h3>Prezzo <%= number_to_currency(p.price) %></h3>
+          <label for="quantity">Q.tà</label>
+          <input type="number" name="quantity" value="1">
+          <button type="button" name="button" class="btn btn-primary">Aggiungi al carrello</button>
+        </p>
+
+      </div>
+    </div>
+  <% end %>
+
+</div>
