@@ -12,3 +12,6 @@
   <div class="col-md-6">
     <%= button_to "Svuota carrello", cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-primary" %>
   </div>
+  <div class="col-md-6">
+    <%= button_to "Vai alla cassa", new_order_path, method: :get, class: "btn btn-primary" %>
+  </div>
