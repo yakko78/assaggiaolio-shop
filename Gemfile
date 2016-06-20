@@ -39,15 +39,15 @@ gem 'bootstrap_form'
 gem 'retina_tag', '~> 1.3', '>= 1.3.1'
 
 group :test do
-  gem "rspec-rails"
-  gem "shoulda-matchers"
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem "rspec-rails"
+  gem 'ffaker'
   gem 'byebug'
   gem "factory_girl_rails"
-  gem 'ffaker'
 end
 
 group :development do
