@@ -1,9 +1,25 @@
-<%= render @cart %>
-
 <div class="container">
+  <h1>Carrello</h1>
+  <% if @cart.line_items.present? %>
   <div class="col-md-12">
-    <%= button_to "Continua gli acquisti", store_url, method: :get, class: "btn btn-primary pull-right" %>
-    
-    <%= button_to "Vai alla cassa", store_url, method: :get, class: "btn btn-primary pull-right" %>
+      <table class="table">
+        <%= render(@cart.line_items) %>
+        <tr>
+          <td colspan="3" style="text-align:right">Totale: <%= number_to_currency(@cart.total_price) %></td>
+        </tr>
+      </table>
   </div>
+  <div class="col-md-12">
+    <%= button_to "Termina e paga", edit_cart_path, method: :get, class: "btn btn-primary pull-right" %>
+    <%= button_to "Continua gli acquisti", store_url, method: :get, class: "btn btn-primary pull-right" %>
+  </div>
+
+
+  <% else %>
+    <div class="class-md-12">
+      Il tuo carrello è vuoto
+    </div>
+  <% end %>
+
+
 </div>

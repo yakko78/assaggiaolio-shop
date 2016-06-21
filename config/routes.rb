@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :shipping_addresses
+  resources :billing_addresses
   resources :orders
   resources :line_items
   resources :carts
   get 'store/index'
+  get '/checkout' => 'carts#checkout'
+  post '/pay' => 'carts#pay'
 
   root 'store#index', as: 'store'
 

@@ -1,0 +1,73 @@
+<%= render @cart %>
+
+<%= button_to "Aggiungi un indirizzo di spedizione", new_shipping_address_path, method: :get, class: "btn btn-primary" %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Firstname:</strong>
+  <%= @billing_address.firstname %>
+</p>
+
+<p>
+  <strong>Lastname:</strong>
+  <%= @billing_address.lastname %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @billing_address.company %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @billing_address.address %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @billing_address.zip %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @billing_address.city %>
+</p>
+
+<p>
+  <strong>Province:</strong>
+  <%= @billing_address.province %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @billing_address.state %>
+</p>
+
+<p>
+  <strong>Telephone:</strong>
+  <%= @billing_address.telephone %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @billing_address.email %>
+</p>
+
+<p>
+  <strong>Vat:</strong>
+  <%= @billing_address.vat %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @billing_address.order %>
+</p>
+
+<p>
+  <strong>Cart:</strong>
+  <%= @billing_address.cart %>
+</p>
+
+<%= link_to 'Edit', edit_billing_address_path(@billing_address) %> |
+<%= link_to 'Back', billing_addresses_path %>

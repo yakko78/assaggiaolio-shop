@@ -1,0 +1,10 @@
+<h1>Nuovo Indirizzo di Spedizione</h1>
+
+<%= fields_for @billing_address do |p| %>
+  Nome: <%= p.text_field :firstname %>
+<% end %>
+
+<%= button_to "Copia da indirizzo fatturazione", "", class: "btn btn-primary" %>
+<%= render 'form' %>
+
+<%= link_to 'Back', shipping_addresses_path %>

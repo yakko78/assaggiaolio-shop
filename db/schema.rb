@@ -11,7 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620125556) do
+ActiveRecord::Schema.define(version: 20160620175204) do
+
+  create_table "billing_addresses", force: :cascade do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "company"
+    t.text     "address"
+    t.integer  "zip"
+    t.string   "city"
+    t.string   "province"
+    t.string   "state"
+    t.string   "telephone"
+    t.string   "email"
+    t.string   "vat"
+    t.integer  "order_id"
+    t.integer  "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "billing_addresses", ["cart_id"], name: "index_billing_addresses_on_cart_id"
+  add_index "billing_addresses", ["order_id"], name: "index_billing_addresses_on_order_id"
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -32,9 +53,6 @@ ActiveRecord::Schema.define(version: 20160620125556) do
   add_index "line_items", ["product_id"], name: "index_line_items_on_product_id"
 
   create_table "orders", force: :cascade do |t|
-    t.string   "name"
-    t.text     "address"
-    t.string   "email"
     t.string   "pay_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,5 +70,25 @@ ActiveRecord::Schema.define(version: 20160620125556) do
     t.datetime "updated_at",    null: false
     t.decimal  "capacity_floz"
   end
+
+  create_table "shipping_addresses", force: :cascade do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "company"
+    t.text     "address"
+    t.integer  "zip"
+    t.string   "city"
+    t.string   "province"
+    t.string   "state"
+    t.string   "telephone"
+    t.string   "email"
+    t.integer  "order_id"
+    t.integer  "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "shipping_addresses", ["cart_id"], name: "index_shipping_addresses_on_cart_id"
+  add_index "shipping_addresses", ["order_id"], name: "index_shipping_addresses_on_order_id"
 
 end

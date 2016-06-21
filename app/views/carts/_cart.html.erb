@@ -1,17 +1,22 @@
-  <h1>Carrello</h1>
-
-  <div class="col-md-12">
+<h1>Carrello</h1>
+<% if cart.line_items.present? %>
+<div class="col-md-12">
     <table class="table">
       <%= render(cart.line_items) %>
       <tr>
         <td colspan="3" style="text-align:right">Totale: <%= number_to_currency(cart.total_price) %></td>
       </tr>
     </table>
-  </div>
+</div>
+<div class="col-md-6">
+  <%#= button_to "Svuota carrello", @cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-primary" %>
+</div>
+<div class="col-md-6">
+  <%#= button_to "Vai alla cassa", @cart, method: :get, class: "btn btn-primary" %>
+</div>
 
-  <div class="col-md-6">
-    <%= button_to "Svuota carrello", cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-primary" %>
+<% else %>
+  <div class="class-md-12">
+    Il tuo carrello è vuoto
   </div>
-  <div class="col-md-6">
-    <%= button_to "Vai alla cassa", new_order_path, method: :get, class: "btn btn-primary" %>
-  </div>
+<% end %>
