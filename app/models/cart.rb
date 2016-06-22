@@ -19,15 +19,20 @@ class Cart < ActiveRecord::Base
   end
 
   def shipping_price
-    if !shipping_address.nil?
+
+    # se c'è Shipping meglio, altrimenti prendo Billing
+
+    s = shipping_address ||= billing_address
+
+    if !s.nil?
       total_quantity = line_items.to_a.sum { |item| item.quantity }
 
       result = case total_quantity
-      when 1..15 then shipping_address.shipping_table_rate.a
-      when 16..26 then shipping_address.shipping_table_rate.b
-      when 37..72 then shipping_address.shipping_table_rate.c
-      when 73..136 then shipping_address.shipping_table_rate.d
-      when 137..198 then shipping_address.shipping_table_rate.e
+      when 1..15 then s.shipping_table_rate.a
+      when 16..26 then s.shipping_table_rate.b
+      when 37..72 then s.shipping_table_rate.c
+      when 73..136 then s.shipping_table_rate.d
+      when 137..198 then s.shipping_table_rate.e
       else 0
       end
 

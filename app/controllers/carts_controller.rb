@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:show, :edit, :update, :destroy, :checkout]
+  before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
@@ -16,6 +16,13 @@ class CartsController < ApplicationController
   # GET /carts/new
   def new
     @cart = Cart.new
+    # @cart.build_billing_address
+    # @cart.billing_address.build_shipping_table_rate
+    # @cart.build_shipping_address
+    # @cart.shipping_address.build_shipping_table_rate
+
+    # @shipping_table_rates = ShippingTableRate.all
+
   end
 
   def pay
@@ -23,9 +30,15 @@ class CartsController < ApplicationController
 
   # GET /carts/1/edit
   def edit
-    @cart.build_billing_address
-    @cart.build_shipping_address
-    @cart.shipping_address.build_shipping_table_rate
+    if @cart.billing_address.nil?
+      @cart.build_billing_address
+      @cart.billing_address.build_shipping_table_rate
+    end
+
+    if @cart.shipping_address.nil?
+      @cart.build_shipping_address
+      @cart.shipping_address.build_shipping_table_rate
+    end
 
     @shipping_table_rates = ShippingTableRate.all
   end
@@ -49,24 +62,36 @@ class CartsController < ApplicationController
   # PATCH/PUT /carts/1
   # PATCH/PUT /carts/1.json
   def update
-    @shipping_tr = ShippingTableRate.find(cart_params[:shipping_address_attributes][:shipping_table_rate_id])
+
+    if params[:ship_same_address]
+      @shipping_attributes = cart_params[:billing_address_attributes].except!(:email, :vat)
+      # strippare i campi che non servono
+    else
+      @shipping_attributes = cart_params[:shipping_address_attributes]
+    end
 
     # BILLING
     @billing_address = BillingAddress.new(cart_params[:billing_address_attributes])
-    @billing_address.country = @shipping_tr.country
-    @cart.billing_address = @billing_address
+    if @billing_address.valid?
+      @cart.billing_address = @billing_address
+    end
 
     # SHIPPING
-    @shipping_address = ShippingAddress.new(cart_params[:shipping_address_attributes])
-    @shipping_address.country = @shipping_tr.country
-    @cart.shipping_address = @shipping_address
+    @shipping_address = ShippingAddress.new(@shipping_attributes)
+    if @shipping_address.valid?
+      @cart.shipping_address = @shipping_address
+    end
 
     respond_to do |format|
-      if @cart.update(cart_params)
+      # if @cart.update(cart_params)
+      if @cart.save
+
         format.html { redirect_to store_url, notice: 'Cart was successfully updated.' }
         format.json { render :show, status: :ok, location: @cart }
       else
-        format.html { render :edit }
+        format.html { redirect_to "http://www.google.it", notice: 'Cart was successfully updated.' }
+
+        # format.html { render :edit }
         format.json { render json: @cart.errors, status: :unprocessable_entity }
       end
     end
@@ -90,7 +115,7 @@ class CartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
-      params.require(:cart).permit(billing_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :country, :telephone, :email, :vat, :order_id, :cart_id], shipping_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone])
+      params.require(:cart).permit(:ship_same_address, billing_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email, :vat, :order_id, :cart_id], shipping_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone])
       # params.require(:billing_address).permit(:firstname, :lastname, :company, :address, :zip, :city, :province, :state, :telephone, :email, :vat, :order_id, :cart_id)
       # params.fetch(:cart, {})
     end
