@@ -1,0 +1,2 @@
+module ShippingTableRatesHelper
+end

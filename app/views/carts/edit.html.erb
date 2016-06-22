@@ -1,86 +1,145 @@
 <%= simple_form_for @cart, validate: true do |c| %>
 
-  <%= c.simple_fields_for :billing_address do |b| %>
+
   <!-- Dati Utente -->
   <div class="col-md-4">
     <h2>I tuoi dati</h2>
     <h5>Privato o azienda? Seleziona la tipologia esatta</h5>
 
-    <div class="radio">
+    <%= c.simple_fields_for :billing_address do |b| %>
+    <div id="billing-address-wrapper">
+      <div class="radio">
+        <div class="row">
+          <div class="col-md-6">
+            <label class="radio-inline">
+              <input type="radio" name="optionsRadios" value="1" checked="">Privato
+            </label>
+          </div>
+          <div class="col-md-6">
+            <label class="radio-inline">
+              <input type="radio" name="optionsRadios" value="2">Azienda
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <br>
+
       <div class="row">
-        <div class="col-md-6">
-          <label class="radio-inline">
-            <input type="radio" name="optionsRadios" value="1" checked="">Privato
-          </label>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= b.input :firstname, class: 'form-control'  %>
+          </div>
         </div>
-        <div class="col-md-6">
-          <label class="radio-inline">
-            <input type="radio" name="optionsRadios" value="2">Azienda
-          </label>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= b.input :lastname, class: 'form-control'  %>
+          </div>
         </div>
       </div>
-    </div>
+      <div class="form-group">
+        <%= b.input :company, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= b.input :address, class: 'form-control' %>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= b.input :zip, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <%= b.input :city, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= b.input :province, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= b.input :country, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= b.input :telephone, class: 'form-control', required: false %>
+      </div>
+      <div class="form-group">
+        <%= b.input :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= b.input :vat, class: 'form-control' %>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="" checked> Spedire allo stesso indirizzo
+        </label>
+      </div>
 
-    <br>
+    </div>
+    <% end %>
 
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <%= b.input :firstname, class: 'form-control'  %>
+    <%= c.simple_fields_for :shipping_address do |s| %>
+    <div id="shipping-address-wrapper">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= s.input :firstname, class: 'form-control'  %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= s.input :lastname, class: 'form-control'  %>
+          </div>
         </div>
       </div>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <%= b.input :lastname, class: 'form-control'  %>
+      <div class="form-group">
+        <%= s.input :company, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= s.input :address, class: 'form-control' %>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= s.input :zip, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <%= s.input :city, class: 'form-control' %>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group">
-      <%= b.input :company, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= b.input :address, class: 'form-control' %>
-    </div>
-    <div class="row">
-      <div class="col-sm-4">
-        <div class="form-group">
-          <%= b.input :zip, class: 'form-control' %>
-        </div>
+      <div class="form-group">
+        <%= s.input :province, class: 'form-control' %>
       </div>
-      <div class="col-sm-8">
-        <div class="form-group">
-          <%= b.input :city, class: 'form-control' %>
-        </div>
+      <div class="form-group">
+        <%= s.input :shipping_table_rate_id, label: 'Country' do %>
+          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country'), { include_blank: 'Seleziona...' }, { class: 'form-control' } %>
+        <% end %>
       </div>
+
+      <div class="form-group">
+        <%= s.input :telephone, class: 'form-control', required: false %>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" value="" checked> Spedire allo stesso indirizzo
+        </label>
+      </div>
+
     </div>
-    <div class="form-group">
-      <%= b.input :province, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= b.input :state, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= b.input :telephone, class: 'form-control', required: false %>
-    </div>
-    <div class="form-group">
-      <%= b.input :email, class: 'form-control' %>
-    </div>
-    <div class="form-group">
-      <%= b.input :vat, class: 'form-control' %>
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="" checked> Spedire allo stesso indirizzo
-      </label>
-    </div>
+    <% end %>
+
+
 
   </div>
 
-  <% end %>
-
   <div class="col-md-4">
 
-    <h2>Metodo di Spedizione</h2>
+    <!-- Shipping Method -->
+    <h2>Spedizione</h2>
     <h5>Scegli un metodo di spedizione</h5>
     <div class="radio">
       <div class="row">

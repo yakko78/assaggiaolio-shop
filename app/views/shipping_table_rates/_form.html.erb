@@ -1,0 +1,16 @@
+<%= simple_form_for(@shipping_table_rate) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :country %>
+    <%= f.input :a %>
+    <%= f.input :b %>
+    <%= f.input :c %>
+    <%= f.input :d %>
+    <%= f.input :e %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

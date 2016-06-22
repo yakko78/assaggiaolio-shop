@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620175204) do
+ActiveRecord::Schema.define(version: 20160622090915) do
 
   create_table "billing_addresses", force: :cascade do |t|
     t.string   "firstname"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160620175204) do
     t.integer  "zip"
     t.string   "city"
     t.string   "province"
-    t.string   "state"
+    t.string   "country"
     t.string   "telephone"
     t.string   "email"
     t.string   "vat"
@@ -79,16 +79,28 @@ ActiveRecord::Schema.define(version: 20160620175204) do
     t.integer  "zip"
     t.string   "city"
     t.string   "province"
-    t.string   "state"
+    t.string   "country"
     t.string   "telephone"
-    t.string   "email"
     t.integer  "order_id"
     t.integer  "cart_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "shipping_table_rate_id"
   end
 
   add_index "shipping_addresses", ["cart_id"], name: "index_shipping_addresses_on_cart_id"
   add_index "shipping_addresses", ["order_id"], name: "index_shipping_addresses_on_order_id"
+  add_index "shipping_addresses", ["shipping_table_rate_id"], name: "index_shipping_addresses_on_shipping_table_rate_id"
+
+  create_table "shipping_table_rates", force: :cascade do |t|
+    t.string   "country"
+    t.decimal  "a"
+    t.decimal  "b"
+    t.decimal  "c"
+    t.decimal  "d"
+    t.decimal  "e"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
