@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :update, :destroy, :calculate_shipping]
 
   # GET /carts
   # GET /carts.json
@@ -104,6 +104,16 @@ class CartsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to store_url, notice: 'Cart was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def calculate_shipping
+
+    shipping_table_rate_id = params[:id]
+    @cart.calculate_shipping_cost(shipping_table_rate_id)
+
+    respond_to do |format|
+      format.js
     end
   end
 

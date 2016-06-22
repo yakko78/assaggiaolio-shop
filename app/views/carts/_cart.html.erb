@@ -3,6 +3,11 @@
 <div class="col-md-12">
     <table class="table">
       <%= render(cart.line_items) %>
+      <% if cart.shipping_cost %>
+      <tr>
+        <td colspan="3" style="text-align:right">Spedizione: <%= number_to_currency(cart.shipping_cost) %></td>
+      </tr>
+      <% end %>
       <tr>
         <td colspan="3" style="text-align:right">Totale: <%= number_to_currency(cart.total_price) %></td>
       </tr>

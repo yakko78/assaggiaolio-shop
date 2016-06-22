@@ -5,27 +5,8 @@
   <!-- Dati Utente -->
   <div class="col-md-4">
     <h2>I tuoi dati</h2>
-    <h5>Privato o azienda? Seleziona la tipologia esatta</h5>
-
     <%= c.simple_fields_for :billing_address do |b| %>
     <div id="billing-address-wrapper">
-      <div class="radio">
-        <div class="row">
-          <div class="col-md-6">
-            <label class="radio-inline">
-              <input type="radio" name="optionsRadios" value="1" checked="">Privato
-            </label>
-          </div>
-          <div class="col-md-6">
-            <label class="radio-inline">
-              <input type="radio" name="optionsRadios" value="2">Azienda
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <br>
-
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
@@ -61,7 +42,7 @@
       </div>
       <div class="form-group">
         <%= b.input :shipping_table_rate_id, label: 'Country' do %>
-          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @cart.billing_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'form-control' } %>
+          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @cart.billing_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'country_selector form-control' } %>
         <% end %>
       </div>
       <div class="form-group">
@@ -135,27 +116,15 @@
   <div class="col-md-4">
 
     <!-- Shipping Method -->
-    <h2>Spedizione</h2>
-    <h5>Scegli un metodo di spedizione</h5>
+    <h2>Spese di Spedizione</h2>
     <div class="radio">
       <div class="row">
         <div class="col-md-6">
-          <label class="radio-inline">
-            <input type="radio" name="optionsShipping" value="1">Italia
-          </label>
-        </div>
-        <div class="col-md-6">
-          <label class="radio-inline">
-            <input type="radio" name="optionsShipping" value="2">Estero
-          </label>
+          <div id="shipping-costs-wrapper">
+            Seleziona una nazione...
+          </div>
         </div>
       </div>
-
-      <br>
-      <select class="form-control" name="">
-        <option>Seleziona...</option>
-        <option>Niacaragua</option>
-      </select>
 
 
     </div>
@@ -177,7 +146,9 @@
   <div class="col-md-4">
     <h2>Rivedi ordine</h2>
 
-    <%= render @cart %>
+    <div id="cart-wrapper">
+      <%= render @cart %>
+    </div>
 
     <br><br>
     <%= c.submit 'Termina e paga', class: 'btn btn-default btn-primary' %>
@@ -191,5 +162,13 @@
     $('#ship_same_address').click(function(){
       $('#shipping-address-wrapper').toggle(!$(this).prop('checked'));
     });
+
+    $('.country_selector').change(function() {
+      $.ajax({
+        url: '/calculate_shipping/'+ $(this).val(),
+        type: 'GET'
+      });
+    });
+
   });
 </script>

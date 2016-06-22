@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/checkout' => 'carts#checkout'
   post '/pay' => 'carts#pay'
 
+  get  '/calculate_shipping/:id' => 'carts#calculate_shipping'
+
   root 'store#index', as: 'store'
 
   # The priority is based upon order of creation: first created -> highest priority.
