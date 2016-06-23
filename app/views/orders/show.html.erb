@@ -2,17 +2,22 @@
 
 <p>
   <strong>Name:</strong>
-  <%= @order.name %>
+  <%= @order.billing_address.firstname %>
 </p>
 
 <p>
   <strong>Address:</strong>
-  <%= @order.address %>
+  <%= @order.billing_address.address %>
 </p>
 
 <p>
   <strong>Email:</strong>
-  <%= @order.email %>
+  <%= @order.billing_address.email %>
+</p>
+
+<p>
+  <strong>Shipping Cost:</strong>
+  <%= @order.shipping_cost %>
 </p>
 
 <p>

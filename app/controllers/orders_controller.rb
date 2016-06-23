@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
   before_action :set_cart, only: [:new, :create, :calculate_shipping]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+  protect_from_forgery except: [:hook]
+
   # GET /orders
   # GET /orders.json
   def index
@@ -60,15 +62,15 @@ class OrdersController < ApplicationController
       @order.shipping_address = @shipping_address
     end
 
-    @order.add_line_items_from_cart(@order)
+    @order.add_line_items_from_cart(@cart)
 
     respond_to do |format|
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
 
-        format.html { redirect_to @order, notice: 'Grazie per aver acquistato' }
-        format.json { render :show, status: :created, location: @order }
+        format.html { redirect_to @order.paypal_url(order_path(@order)) }
+        # format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -101,7 +103,6 @@ class OrdersController < ApplicationController
   end
 
   def calculate_shipping
-
     shipping_table_rate_id = params[:id]
     @temporary_shipping_cost = @cart.calculate_shipping_cost(shipping_table_rate_id)
     session[:temporary_shipping_cost] = @temporary_shipping_cost
@@ -113,6 +114,16 @@ class OrdersController < ApplicationController
     end
   end
 
+  def hook
+     params.permit! # Permit all Paypal input params
+     status = params[:payment_status]
+     if status == "Completed"
+       @order = Order.find params[:invoice]
+       @order.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
+     end
+     render nothing: true
+   end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -121,7 +132,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:pay_type, :ship_same_address, billing_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email, :vat, :order_id, :cart_id], shipping_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone])
+      params.require(:order).permit(:pay_type, :shipping_cost, :ship_same_address, billing_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email, :vat, :order_id, :cart_id], shipping_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone])
       # params.require(:order).permit(:pay_type)
     end
 end

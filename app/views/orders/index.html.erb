@@ -9,6 +9,9 @@
       <th>Address</th>
       <th>Email</th>
       <th>Pay type</th>
+      <th>
+        TOTAL
+      </th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +19,11 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><%= order.name %></td>
-        <td><%= order.address %></td>
-        <td><%= order.email %></td>
+        <td><%= order.billing_address.firstname unless order.billing_address.nil? %></td>
+        <td><%= order.billing_address.address unless order.billing_address.nil? %></td>
+        <td><%= order.billing_address.email unless order.billing_address.nil? %></td>
         <td><%= order.pay_type %></td>
+        <td><%= order.amount_to_pay %></td>
         <td><%= link_to 'Show', order %></td>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>
         <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>

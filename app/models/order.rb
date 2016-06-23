@@ -13,4 +13,25 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def amount_to_pay
+    partial = line_items.to_a.sum { |item| item.total_price }
+    partial += self.shipping_cost unless self.shipping_cost.blank?
+  end
+
+  def paypal_url(return_path)
+    values = {
+      business: "stuff-facilitator@yellowtulip.it",
+      cmd: "_xclick",
+      uplaod: 1,
+      return: "#{Rails.application.secrets.app_host}#{return_path}",
+      invoice: id,
+      amount: self.amount_to_pay,
+      item_name: "Nome articolo da pagare",
+      item_number: '1',
+      notify_url: "#{Rails.application.secrets.app_host}/hook"
+    }
+
+    "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
+  end
+
 end

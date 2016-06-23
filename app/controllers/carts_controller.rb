@@ -26,15 +26,6 @@ class CartsController < ApplicationController
 
   end
 
-  def pay
-    # PAYPAL
-
-
-    # CONSORZIO TRIVENETO
-    #pay_triveneto(@cart.total_price)
-
-  end
-
   # GET /carts/1/edit
   def edit
     if @cart.billing_address.nil?
@@ -100,8 +91,6 @@ class CartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
-      params.require(:cart).permit(:ship_same_address, billing_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email, :vat, :order_id, :cart_id], shipping_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone])
-      # params.require(:billing_address).permit(:firstname, :lastname, :company, :address, :zip, :city, :province, :state, :telephone, :email, :vat, :order_id, :cart_id)
-      # params.fetch(:cart, {})
+      params.fetch(:cart, {})
     end
 end

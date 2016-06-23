@@ -1,11 +1,5 @@
 class Cart < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
-  has_one :billing_address, dependent: :destroy
-  has_one :shipping_address, dependent: :destroy
-
-
-  accepts_nested_attributes_for :billing_address, allow_destroy: true
-  accepts_nested_attributes_for :shipping_address, allow_destroy: true
 
   def add_product(product_id, quantity)
     current_item = line_items.find_by(product_id: product_id)

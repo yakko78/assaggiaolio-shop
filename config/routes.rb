@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   resources :line_items
   resources :carts
   get 'store/index'
-  get '/checkout' => 'carts#checkout'
-  get '/pay' => 'carts#pay'
+
+  post "/orders/:id" => "orders#show"
+  post "/hook" => "orders#hook"
 
   get  '/calculate_shipping/:id' => 'orders#calculate_shipping'
 
