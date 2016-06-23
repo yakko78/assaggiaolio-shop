@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   post "/hook" => "orders#hook"
   post "/hook_triveneto" => "orders#hook_triveneto"
 
+  get "/fake" => "orders#fake"
+
   get  '/calculate_shipping/:id' => 'orders#calculate_shipping'
+  get '/error' => 'orders#error'
 
   root 'store#index', as: 'store'
 

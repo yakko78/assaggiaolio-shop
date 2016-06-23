@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_cart, only: [:new, :create, :calculate_shipping]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-  protect_from_forgery except: [:hook]
+  protect_from_forgery except: [:hook, :hook_triveneto]
 
   # GET /orders
   # GET /orders.json
@@ -128,19 +128,41 @@ class OrdersController < ApplicationController
      render nothing: true
    end
 
+   def fake
+     require 'uri'
+     require 'net/http'
+
+     params = {
+       result: "APPROVED",
+       udf1: "56"
+     }
+
+     url = "#{Rails.application.secrets.app_host}/hook_triveneto"
+
+     puts url
+
+     test = Net::HTTP.post_form(URI.parse(url), params)
+
+     puts test.body
+
+   end
+
    def hook_triveneto
      params.permit! # Permit all Consorzio Triveneto input params
      result = params[:result]
      if result == "APPROVED"
-       @order = Order.find params[:id]
-       @order.update_attributes notification_params: [params[:paymentid], params[:auth], params[:avr], params[:ref], params[:postdate], params[:trackid], params[:cardtype], params[:payinst], params[:liability], params[:cardcountry], params[:ipcountry]], status: result, transaction_id: params[:tranid], purchased_at: Time.now
-
-       render @order
+       @order = Order.find params[:udf1]
+       @order.update_attributes notification_params: params, status: result, transaction_id: params[:tranid], purchased_at: Time.now
+       render text: "REDIRECT=#{Rails.application.secrets.app_host}/orders/#{@order.id}"
+       return
      else
-       render nothing: true
-       #render verso una pagina con un errore
+       respond_to do |format|
+         format.html { redirect_to "/error" }
+       end
      end
+   end
 
+   def error
    end
 
   private

@@ -51,9 +51,10 @@ class Order < ActiveRecord::Base
       action: "4",
       amt: self.amount_to_pay.to_s,
       currencycode: "978",
+      udf1: id.to_s,
       langid: "ITA",
-      responseURL: "#{Rails.application.secrets.app_host}#hook_triveneto",
-      errorURL: "#{Rails.application.secrets.app_host}",
+      responseURL: "#{Rails.application.secrets.app_host}/hook_triveneto",
+      errorURL: "#{Rails.application.secrets.app_host}/error",
       trackid: "AO" + Time.now.to_i.to_s
     }
 
