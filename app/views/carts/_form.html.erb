@@ -42,7 +42,7 @@
       </div>
       <div class="form-group">
         <%= b.input :shipping_table_rate_id, label: 'Country' do %>
-          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @cart.billing_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'country_selector form-control' } %>
+          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @cart.billing_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'billing_country_selector form-control' } %>
         <% end %>
       </div>
       <div class="form-group">
@@ -99,7 +99,7 @@
       </div>
       <div class="form-group">
         <%= s.input :shipping_table_rate_id, label: 'Country' do %>
-          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @cart.shipping_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'form-control' } %>
+          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @cart.shipping_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'shipping_country_selector form-control' } %>
         <% end %>
       </div>
 
@@ -121,7 +121,7 @@
       <div class="row">
         <div class="col-md-6">
           <div id="shipping-costs-wrapper">
-            Seleziona una nazione...
+            <%= "#{@cart.billing_address.shipping_table_rate.country}: #{number_to_currency(@cart.shipping_cost)}" unless @cart.shipping_cost.nil? %>
           </div>
         </div>
       </div>
@@ -163,12 +163,25 @@
       $('#shipping-address-wrapper').toggle(!$(this).prop('checked'));
     });
 
-    $('.country_selector').change(function() {
+    // Se sono presenti i dati di Shipping, allora li calcolo su quello
+    // Altrimenti calcolo le spedizioni su Billing
+
+    $('.billing_country_selector').change(function() {
+      if(!$('.shipping_country_selector').val()) {
+        $.ajax({
+          url: '/calculate_shipping/'+ $(this).val(),
+          type: 'GET'
+        });
+      }
+    });
+
+    $('.shipping_country_selector').change(function() {
       $.ajax({
         url: '/calculate_shipping/'+ $(this).val(),
         type: 'GET'
       });
     });
+
 
   });
 </script>

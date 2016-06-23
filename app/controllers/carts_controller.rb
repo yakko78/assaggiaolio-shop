@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:show, :edit, :update, :destroy, :calculate_shipping]
+  include PaymentTriveneto
+  before_action :set_cart, only: [:show, :edit, :update, :destroy, :pay]
 
   # GET /carts
   # GET /carts.json
@@ -26,6 +27,12 @@ class CartsController < ApplicationController
   end
 
   def pay
+    # PAYPAL
+
+
+    # CONSORZIO TRIVENETO
+    #pay_triveneto(@cart.total_price)
+
   end
 
   # GET /carts/1/edit
@@ -63,35 +70,13 @@ class CartsController < ApplicationController
   # PATCH/PUT /carts/1.json
   def update
 
-    if params[:ship_same_address]
-      @shipping_attributes = cart_params[:billing_address_attributes].except!(:email, :vat)
-      # strippare i campi che non servono
-    else
-      @shipping_attributes = cart_params[:shipping_address_attributes]
-    end
-
-    # BILLING
-    @billing_address = BillingAddress.new(cart_params[:billing_address_attributes])
-    if @billing_address.valid?
-      @cart.billing_address = @billing_address
-    end
-
-    # SHIPPING
-    @shipping_address = ShippingAddress.new(@shipping_attributes)
-    if @shipping_address.valid?
-      @cart.shipping_address = @shipping_address
-    end
-
     respond_to do |format|
       # if @cart.update(cart_params)
       if @cart.save
-
-        format.html { redirect_to store_url, notice: 'Cart was successfully updated.' }
+        format.html { redirect_to pay_path, notice: 'Cart was successfully updated.' }
         format.json { render :show, status: :ok, location: @cart }
       else
-        format.html { redirect_to "http://www.google.it", notice: 'Cart was successfully updated.' }
-
-        # format.html { render :edit }
+        format.html { render :edit }
         format.json { render json: @cart.errors, status: :unprocessable_entity }
       end
     end
@@ -104,16 +89,6 @@ class CartsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to store_url, notice: 'Cart was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-
-  def calculate_shipping
-
-    shipping_table_rate_id = params[:id]
-    @cart.calculate_shipping_cost(shipping_table_rate_id)
-
-    respond_to do |format|
-      format.js
     end
   end
 

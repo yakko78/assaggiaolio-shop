@@ -1,33 +1,187 @@
-<%= form_for(@order) do |f| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <ul>
-      <% @order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= simple_form_for @order, validate: true do |c| %>
+
+
+  <!-- Dati Utente -->
+  <div class="col-md-4">
+    <h2>I tuoi dati</h2>
+    <%= c.simple_fields_for :billing_address do |b| %>
+    <div id="billing-address-wrapper">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= b.input :firstname, class: 'form-control'  %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= b.input :lastname, class: 'form-control'  %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= b.input :company, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= b.input :address, class: 'form-control' %>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= b.input :zip, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <%= b.input :city, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= b.input :province, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= b.input :shipping_table_rate_id, label: 'Country' do %>
+          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.billing_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'billing_country_selector form-control' } %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= b.input :telephone, class: 'form-control', required: false %>
+      </div>
+      <div class="form-group">
+        <%= b.input :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= b.input :vat, class: 'form-control' %>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="ship_same_address" id="ship_same_address" <%= 'checked' unless @order.shipping_address.id.present?  %> > Spedire allo stesso indirizzo
+        </label>
+      </div>
+
     </div>
+    <% end %>
+    <%= c.simple_fields_for :shipping_address do |s| %>
+    <div id="shipping-address-wrapper" style="display: <%= @order.shipping_address.id.present? ? 'block' : 'none' %>">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= s.input :firstname, class: 'form-control'  %>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <%= s.input :lastname, class: 'form-control'  %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= s.input :company, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= s.input :address, class: 'form-control' %>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= s.input :zip, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="form-group">
+            <%= s.input :city, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= s.input :province, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= s.input :shipping_table_rate_id, label: 'Country' do %>
+          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.shipping_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'shipping_country_selector form-control' } %>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= s.input :telephone, class: 'form-control', required: false %>
+      </div>
+    </div>
+    <% end %>
+
+
+
+  </div>
+
+  <div class="col-md-4">
+
+    <!-- Shipping Method -->
+    <h2>Spese di Spedizione</h2>
+    <div class="radio">
+      <div class="row">
+        <div class="col-md-6">
+          <div id="shipping-costs-wrapper">
+            <%= "#{@order.billing_address.shipping_table_rate.country}: #{number_to_currency(@order.shipping_cost)}" unless @order.shipping_cost.nil? %>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <h2>Metodo di Pagamento</h2>
+
+    <div class="radio">
+      <label>
+        <input type="radio" name="PaymentType" value="1" checked="">PayPal
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="PaymentType" value="1" >Carta di Credito
+      </label>
+    </div>
+
+  </div>
+  <div class="col-md-4">
+    <h2>Rivedi ordine</h2>
+
+    <div id="cart-wrapper">
+      <%= render @cart %>
+    </div>
+
+    <br><br>
+    <%= c.submit 'Termina e paga', class: 'btn btn-default btn-primary' %>
+
+  </div>
+
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_area :address %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :pay_type %><br>
-    <%= f.text_field :pay_type %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#ship_same_address').click(function(){
+      $('#shipping-address-wrapper').toggle(!$(this).prop('checked'));
+    });
+
+    // Se sono presenti i dati di Shipping, allora li calcolo su quello
+    // Altrimenti calcolo le spedizioni su Billing
+
+    $('.billing_country_selector').change(function() {
+      if(!$('.shipping_country_selector').val()) {
+        $.ajax({
+          url: '/calculate_shipping/'+ $(this).val(),
+          type: 'GET'
+        });
+      }
+    });
+
+    $('.shipping_country_selector').change(function() {
+      $.ajax({
+        url: '/calculate_shipping/'+ $(this).val(),
+        type: 'GET'
+      });
+    });
+
+
+  });
+</script>

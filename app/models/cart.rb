@@ -32,13 +32,13 @@ class Cart < ActiveRecord::Base
       else 0
       end
 
-      self.shipping_cost = result
+      result
     end
   end
 
   def total_price
     partial = line_items.to_a.sum { |item| item.total_price }
-    partial += self.shipping_cost unless self.shipping_cost.blank?
+    # partial += self.shipping_cost unless self.shipping_cost.blank?
 
     partial
 

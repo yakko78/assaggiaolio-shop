@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:new, :create]
+  before_action :set_cart, only: [:new, :create, :calculate_shipping]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   # GET /orders
@@ -21,7 +21,16 @@ class OrdersController < ApplicationController
       return
     end
 
+    session[:temporary_shipping_cost] = nil
+
     @order = Order.new
+    @order.build_billing_address
+    @order.billing_address.build_shipping_table_rate
+    @order.build_shipping_address
+    @order.shipping_address.build_shipping_table_rate
+
+    @shipping_table_rates = ShippingTableRate.all
+
   end
 
   # GET /orders/1/edit
@@ -32,7 +41,26 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-    @order.add_line_items_from_cart(@cart)
+
+    if params[:ship_same_address]
+      @shipping_attributes = order_params[:billing_address_attributes].except!(:email, :vat)
+    else
+      @shipping_attributes = order_params[:shipping_address_attributes]
+    end
+
+    # BILLING
+    @billing_address = BillingAddress.new(order_params[:billing_address_attributes])
+    if @billing_address.valid?
+      @order.billing_address = @billing_address
+    end
+
+    # SHIPPING
+    @shipping_address = ShippingAddress.new(@shipping_attributes)
+    if @shipping_address.valid?
+      @order.shipping_address = @shipping_address
+    end
+
+    @order.add_line_items_from_cart(@order)
 
     respond_to do |format|
       if @order.save
@@ -72,6 +100,19 @@ class OrdersController < ApplicationController
     end
   end
 
+  def calculate_shipping
+
+    shipping_table_rate_id = params[:id]
+    @temporary_shipping_cost = @cart.calculate_shipping_cost(shipping_table_rate_id)
+    session[:temporary_shipping_cost] = @temporary_shipping_cost
+    shipping_table_rate = ShippingTableRate.find(shipping_table_rate_id)
+    @new_country = shipping_table_rate.country
+
+    respond_to do |format|
+        format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -80,6 +121,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:name, :address, :email, :pay_type)
+      params.require(:order).permit(:pay_type, :ship_same_address, billing_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email, :vat, :order_id, :cart_id], shipping_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone])
+      # params.require(:order).permit(:pay_type)
     end
 end

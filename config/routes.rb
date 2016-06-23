@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   resources :carts
   get 'store/index'
   get '/checkout' => 'carts#checkout'
-  post '/pay' => 'carts#pay'
+  get '/pay' => 'carts#pay'
 
-  get  '/calculate_shipping/:id' => 'carts#calculate_shipping'
+  get  '/calculate_shipping/:id' => 'orders#calculate_shipping'
 
   root 'store#index', as: 'store'
 
