@@ -1,29 +1,44 @@
-<p id="notice"><%= notice %></p>
+<div class="col-md-12">
+  <h1>Conferma acquisto</h1>
+
+  <p>
+    Gentile cliente <br>
+    ti ringraziamo per il tuo acquisto.
+  </p>
+
+  <p>
+    Qui ti riepiloghiamo i dati del pagamento appena effettuato:
+  </p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @order.billing_address.firstname %>
+  <strong>Importo pagato:</strong> <%= number_to_currency(@order.amount_to_pay) %><br>
+  <strong>Canale di pagamento:</strong>
+  <% if @order.pay_type == "1"   %>
+    PayPal
+  <% elsif @order.pay_type == "2" %>
+    Carta di Credito
+  <% end %>
+  <br>
+  <strong>ID transazione:</strong> <%= @order.transaction_id %>
+</p>
+
+<p>Puoi consultare, stampare e archiviare il tuo ordine in formato PDF <strong>cliccando qui</strong>.</p>
+
+<p>Se desideri ulteriori informazioni puoi contattarci al numero +39 0571 676176
+oppure inviarci una email a <a href="mailto:info@assaggiaolio.com">info@assaggiaolio.com</a></p>
+
+<p>
+Questo messaggio è stato generato automaticamente, ti preghiamo di non rispondere.
 </p>
 
 <p>
-  <strong>Address:</strong>
-  <%= @order.billing_address.address %>
+  Cordiali saluti <br>
+Fara Vetrerie e Cristallerie Srl
 </p>
-
+<br>
 <p>
-  <strong>Email:</strong>
-  <%= @order.billing_address.email %>
+  <%= link_to "faravetrerie.it", "http://www.faravetrerie.it" %><br>
+  <%= link_to "assaggiaolio.com", "http://www.assaggiaolio.com" %>
 </p>
 
-<p>
-  <strong>Shipping Cost:</strong>
-  <%= @order.shipping_cost %>
-</p>
-
-<p>
-  <strong>Pay type:</strong>
-  <%= @order.pay_type %>
-</p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+</div>
