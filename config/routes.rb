@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   post "/orders/:id" => "orders#show"
   post "/hook" => "orders#hook"
+  post "/hook_triveneto" => "orders#hook_triveneto"
 
   get  '/calculate_shipping/:id' => 'orders#calculate_shipping'
 

@@ -69,8 +69,12 @@ class OrdersController < ApplicationController
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
 
-        format.html { redirect_to @order.paypal_url(order_path(@order)) }
-        # format.json { render :show, status: :created, location: @order }
+        if @order.pay_type == 1 #PayPal
+          format.html { redirect_to @order.paypal_url(order_path(@order)) }
+        else #Carta di Credito
+          format.html { redirect_to @order.pay_triveneto(order_path(@order)) }
+        end
+
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -122,6 +126,21 @@ class OrdersController < ApplicationController
        @order.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
      end
      render nothing: true
+   end
+
+   def hook_triveneto
+     params.permit! # Permit all Consorzio Triveneto input params
+     result = params[:result]
+     if result == "APPROVED"
+       @order = Order.find params[:id]
+       @order.update_attributes notification_params: [params[:paymentid], params[:auth], params[:avr], params[:ref], params[:postdate], params[:trackid], params[:cardtype], params[:payinst], params[:liability], params[:cardcountry], params[:ipcountry]], status: result, transaction_id: params[:tranid], purchased_at: Time.now
+
+       render @order
+     else
+       render nothing: true
+       #render verso una pagina con un errore
+     end
+
    end
 
   private
