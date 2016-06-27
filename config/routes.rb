@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :products
   resources :shipping_table_rates
   resources :shipping_addresses
   resources :billing_addresses

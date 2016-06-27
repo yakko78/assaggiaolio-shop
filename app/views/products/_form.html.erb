@@ -1,0 +1,18 @@
+<%= simple_form_for(@product) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :sku %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+    <%= f.input :capacity_floz %>
+    <%= f.input :height %>
+    <%= f.input :diameter %>
+    <%= f.input :price %>
+    <%= f.input :capacity_cl %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
