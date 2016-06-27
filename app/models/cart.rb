@@ -2,13 +2,22 @@ class Cart < ActiveRecord::Base
   has_many :line_items, dependent: :destroy
 
   def add_product(product_id, quantity)
+    quantity = quantity.to_i
     current_item = line_items.find_by(product_id: product_id)
+
     if current_item
-      current_item.quantity += quantity.to_i
+      current_item.quantity += quantity
     else
       current_item = line_items.build(product_id: product_id)
       current_item.quantity = quantity
     end
+
+    current_item
+  end
+
+  def update_product(product_id, quantity)
+    current_item = line_items.find_by(product_id: product_id)
+    current_item.quantity = quantity.to_i
     current_item
   end
 
@@ -30,9 +39,9 @@ class Cart < ActiveRecord::Base
     end
   end
 
-  def total_price
+  def total_price(shipping_costs = nil)
     partial = line_items.to_a.sum { |item| item.total_price }
-    # partial += self.shipping_cost unless self.shipping_cost.blank?
+    partial += shipping_costs.to_d unless shipping_costs.nil?
 
     partial
 

@@ -23,8 +23,6 @@ class OrdersController < ApplicationController
       return
     end
 
-    session[:temporary_shipping_cost] = nil
-
     @order = Order.new
     @order.build_billing_address
     @order.billing_address.build_shipping_table_rate
@@ -67,7 +65,9 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
+        session.delete(session[:temporary_shipping_cost])
+        session.delete(session[:cart_id])
+        # session[:cart_id] = nil
 
         if @order.pay_type == 1 #PayPal
           format.html { redirect_to @order.paypal_url(order_path(@order)) }

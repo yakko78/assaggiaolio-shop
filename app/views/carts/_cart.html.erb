@@ -9,7 +9,13 @@
       </tr>
       <% end %>
       <tr>
-        <td colspan="3" style="text-align:right">Totale: <%= number_to_currency(cart.total_price) %></td>
+        <td colspan="3" style="text-align:right">Totale:
+          <% if session[:temporary_shipping_cost].present? %>
+            <%= number_to_currency(cart.total_price(session[:temporary_shipping_cost])) %>
+          <% else  %>
+            <%= number_to_currency(cart.total_price) %>
+          <% end %>
+        </td>
       </tr>
     </table>
 </div>
