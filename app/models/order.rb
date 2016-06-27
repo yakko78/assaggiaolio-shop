@@ -30,7 +30,7 @@ class Order < ActiveRecord::Base
       cmd: "_xclick",
       uplaod: 1,
       return: "#{Rails.application.secrets.app_host}#{return_path}",
-      invoice: id,
+      invoice: id + Time.now.to_i.to_s,
       amount: self.amount_to_pay,
       currency_code: "EUR",
       item_name: "Nome articolo da pagare",
