@@ -44,7 +44,6 @@ class LineItemsController < ApplicationController
   # PATCH/PUT /line_items/1
   # PATCH/PUT /line_items/1.json
   def update
-
     product = Product.find(params[:product_id])
     @line_item = @cart.update_product(product.id, params[:quantity])
 

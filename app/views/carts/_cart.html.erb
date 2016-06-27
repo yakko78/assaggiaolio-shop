@@ -31,3 +31,19 @@
     Il tuo carrello è vuoto
   </div>
 <% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#update_quantity').click(function(){
+      $.ajax({
+        url: '/line_items/'+$(this).siblings('#product_id').val(),
+        method: 'patch',
+        data: {
+          "product_id": $(this).siblings('#product_id').val(),
+          "quantity": $(this).siblings('#quantity').val()
+        }
+      });
+    });
+  });
+</script>

@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
         session.delete(session[:cart_id])
         # session[:cart_id] = nil
 
-        if @order.pay_type == 1 #PayPal
+        if @order.pay_type == "1" #PayPal
           format.html { redirect_to @order.paypal_url(order_path(@order)) }
         else #Carta di Credito
           format.html { redirect_to @order.pay_triveneto(order_path(@order)) }

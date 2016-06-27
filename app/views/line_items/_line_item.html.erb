@@ -1,20 +1,16 @@
 <tr>
-  <%= form_for line_item, remote: true do |f| %>
+  <%#= form_for line_item, remote: true do |f| %>
 
   <td><%= line_item.product.title %></td>
-  <td>
-    <input type="hidden" name="product_id" value="<%= line_item.product_id %>">
-    <input type="text" value="<%= line_item.quantity %>" name="quantity" style="width: 5rem;"> &times; <%= number_to_currency(line_item.product.price) %>
-    <%= button_tag(type: 'submit', class: 'btn btn-primary btn-sm') do %>
-      <span class='glyphicon glyphicon-refresh'></span>
-    <% end %>
-
-
+  <td id="<?= line_item.product.id" name="gatto">
+    <input type="hidden" id="product_id" value="<%= line_item.product_id %>">
+    <input type="text" value="<%= line_item.quantity %>" id="quantity" style="width: 5rem;"> &times; <%= number_to_currency(line_item.product.price) %>
+    <button type="button" name="button" class="btn btn-primary btn-sm" id="update_quantity">  <span class='glyphicon glyphicon-refresh'></span></button>
     <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe , line_item, method: :delete, remote: true, class: "btn btn-danger btn-sm", data: { confirm: "Cancellare questo prodotto?" } %>
 
 
   </td>
   <td><%= number_to_currency(line_item.total_price) %></td>
-  <% end %>
+  <%# end %>
 
 </tr>
