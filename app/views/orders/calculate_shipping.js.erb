@@ -1,2 +1,2 @@
 $('#shipping-costs-wrapper').html("<%= @new_country + ': ' + number_to_currency(session[:temporary_shipping_cost]) %>     <input value='<%= session[:temporary_shipping_cost] %>' type='hidden' name='order[shipping_cost]'>");
-$('#cart-wrapper').html("<%= escape_javascript render(@cart) %>");
+$('#sidebar-cart-wrapper').html("<%= escape_javascript render @cart, checkout: true %>");

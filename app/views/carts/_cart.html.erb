@@ -2,7 +2,7 @@
 <% if cart.line_items.present? %>
 <div class="col-md-12">
     <table class="table">
-      <%= render(cart.line_items) %>
+      <%= render cart.line_items, checkout: checkout %>
       <% if session[:temporary_shipping_cost] %>
       <tr>
         <td colspan="3" style="text-align:right">Spedizione: <%= number_to_currency(session[:temporary_shipping_cost]) %></td>
@@ -19,12 +19,14 @@
       </tr>
     </table>
 </div>
-<div class="col-md-6">
-  <%#= button_to "Svuota carrello", @cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-primary" %>
-</div>
-<div class="col-md-6">
-  <%#= button_to "Vai alla cassa", @cart, method: :get, class: "btn btn-primary" %>
-</div>
+  <% if checkout.blank? %>
+  <div class="col-md-6">
+    <%= button_to "Svuota carrello", @cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-danger" %>
+  </div>
+  <div class="col-md-6">
+    <%= button_to "Vai alla cassa", @cart, method: :get, class: "btn btn-primary" %>
+  </div>
+<% end %>
 
 <% else %>
   <div class="class-md-12">
