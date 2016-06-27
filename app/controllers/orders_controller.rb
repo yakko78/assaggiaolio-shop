@@ -122,29 +122,10 @@ class OrdersController < ApplicationController
      params.permit! # Permit all Paypal input params
      status = params[:payment_status]
      if status == "Completed"
-       @order = Order.find params[:invoice]
+       @order = Order.find params[:custom]
        @order.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
      end
      render nothing: true
-   end
-
-   def fake
-     require 'uri'
-     require 'net/http'
-
-     params = {
-       result: "APPROVED",
-       udf1: "56"
-     }
-
-     url = "#{Rails.application.secrets.app_host}/hook_triveneto"
-
-     puts url
-
-     test = Net::HTTP.post_form(URI.parse(url), params)
-
-     puts test.body
-
    end
 
    def hook_triveneto
