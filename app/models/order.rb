@@ -27,17 +27,31 @@ class Order < ActiveRecord::Base
       zip: self.shipping_address.zip,
       city: self.shipping_address.city,
       email: self.billing_address.email,
-      cmd: "_xclick",
-      uplaod: 1,
+      cmd: "_cart",
+      upload: 1,
       return: "#{Rails.application.secrets.app_host}#{return_path}",
       invoice: id.to_s + Time.now.to_i.to_s,
       custom: id,
-      amount: self.amount_to_pay,
+      # amount: self.amount_to_pay,
       currency_code: "EUR",
-      item_name: "Nome articolo da pagare",
-      item_number: '1',
+      shipping_1: self.shipping_cost,
       notify_url: "#{Rails.application.secrets.app_host}/hook"
     }
+
+    self.line_items.each_with_index do |line_item, index|
+      item_name_key = "item_name_#{(index+1).to_s}"
+      item_name_value = line_item.product.title
+
+      amount_key = "amount_#{(index+1).to_s}"
+      amount_value = line_item.product.price
+
+      quantity_key = "quantity_#{(index+1).to_s}"
+      quantity_value = line_item.quantity
+
+      values[item_name_key] = item_name_value
+      values[amount_key] = amount_value
+      values[quantity_key] = quantity_value
+    end
 
     "#{Rails.application.secrets.paypal_host}/cgi-bin/webscr?" + values.to_query
   end
