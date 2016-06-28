@@ -1,31 +1,6 @@
 <div class="col-md-8">
   <% @products.each do |p| %>
-    <div class="row">
-      <div class="col-md-4">
-        <%= image_tag p.image, class: 'img-responsive' unless p.image.nil? %>
-      </div>
-      <div class="col-md-8">
-        <h1><%= p.title %></h1>
-        <p>
-          <%= p.description %>
-        </p>
-        <%= "Capacità: cl #{p.capacity_cl} (fl. oz. #{p.capacity_floz})" unless p.capacity_cl.nil? %><br>
-        Altezza: <%= p.height %><br>
-        Diametro: <%= p.diameter %><br>
-        <%= link_to "Richiedi info personalizzazione", "" %>
-
-
-        <p>
-          <%= form_tag line_items_path(product_id: p), remote: true do %>
-          <h3><%= t('price')%> <%= number_to_currency(p.price) %></h3>
-          <label for="quantity">Q.tà</label>
-          <input type="number" name="quantity" value="1">
-          <%= submit_tag "Aggiungi al carrello", class: "btn btn-primary" %>
-          <% end %>
-        </p>
-
-      </div>
-    </div>
+    <%= render "products/product", p: p %>
   <% end %>
 </div>
 <div class="col-md-4">

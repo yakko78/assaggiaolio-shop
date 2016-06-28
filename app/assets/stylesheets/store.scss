@@ -1,3 +1,111 @@
 // Place all the styles related to the Store controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+$olive: #413F27;
+$olive_dark: #353421;
+$light_grey: #c7c4ba;
+$dark_grey: #5E5841;
+$dirty_yellow: #C6B100;
+
+
+body {
+  padding-top: 7rem;
+  background-color: $olive;
+  font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+}
+
+#navbar-assaggiaolio {
+  background-color: $olive_dark;
+
+  .navbar-brand {
+    color: #fff;
+  }
+}
+
+.btn-custom {
+  border-radius: 3px;
+  padding: 1.3rem 2.3rem;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  width: 100%;
+
+  &.btn-add-to-cart {
+    background-color: $dark_grey;
+    color: $light_grey;
+  }
+
+  &.btn-light {
+    border: 1px solid $light_grey;
+    color: $light_grey;
+    transition: border 0.5s, color 0.5s;
+    &:hover {
+      border: 1px solid $dirty_yellow;
+      color: $dirty_yellow;
+    }
+  }
+
+}
+
+
+.product-wrapper {
+  margin: 4rem 0;
+  h1 {
+      font-size: 3rem;
+      font-weight: 300;
+      color: #fff;
+      line-height: normal;
+  }
+  p.description {
+    color: $light_grey;
+  }
+  table.tech-specs {
+    margin: 3rem 0;
+    color: #fff;
+    width: 100%;
+    tr {
+      border-bottom: 1px solid $light_grey;
+    }
+    th {
+      padding: 0.5rem 0;
+      text-transform: uppercase;
+      font-weight: 300;
+      width: 60%;
+      font-size: 1.4rem;
+    }
+  }
+  .price {
+    color: #fff;
+    font-size: 3.2rem;
+    font-weight: 300
+  }
+  .cad {
+    font-size: 1.3rem;
+  }
+  .price-table {
+    width: 100%;
+    margin: 2rem 0 4rem 0;
+
+    .quantity-wrapper {
+      vertical-align: bottom;
+
+      text-align: right;
+      label {
+        color: #fff;
+      }
+      input {
+        margin-left: 10px;
+        font-size: 1.7rem;
+        width: 80px;
+        padding: 1rem;
+        border-width: 0px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+}
