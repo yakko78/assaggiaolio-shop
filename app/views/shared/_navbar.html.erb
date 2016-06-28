@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "AssaggiaOlio Shop", store_url, class: "navbar-brand" %>
+      <%= link_to "AssaggiaOlio Shop #{I18n.locale}", store_url, class: "navbar-brand" %>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -16,10 +16,11 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Carrello", @cart %></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Italiano <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lingua <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">English</a></li>
-            <li><a href="#">Espanol</a></li>
+            <li><%= link_to "Italiano", change_locale_path(:it) %></li>
+            <li><%= link_to "English", change_locale_path(:en) %></li>
+            <li><%= link_to "Espanol", change_locale_path(:es) %></li>
           </ul>
         </li>
       </ul>
