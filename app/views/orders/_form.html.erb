@@ -63,7 +63,7 @@
     </div>
     <% end %>
     <%= c.simple_fields_for :shipping_address do |s| %>
-    <div id="shipping-address-wrapper" style="display: <%= @order.shipping_address.id.present? ? 'block' : 'none' %>">
+    <div id="shipping-address-wrapper">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
@@ -161,8 +161,13 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+    <% if !@order.shipping_address.id.present? %>
+      $('#shipping-address-wrapper').hide();
+    <% end %>
+
     $('#ship_same_address').click(function(){
       $('#shipping-address-wrapper').toggle(!$(this).prop('checked'));
+      $('#new_order').resetClientSideValidations();
     });
 
     // Se sono presenti i dati di Shipping, allora li calcolo su quello
