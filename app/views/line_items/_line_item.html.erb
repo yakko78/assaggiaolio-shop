@@ -1,11 +1,11 @@
 <tr>
   <td><%= line_item.product.title %></td>
-  <td id="<?= line_item.product.id" name="gatto">
-    <input type="hidden" id="product_id" value="<%= line_item.product_id %>">
+  <td id="<%= line_item.product.id %>">
+    <input type="hidden" class="product_id" value="<%= line_item.product_id %>">
 
     <% if checkout.blank? %>
-      <input type="text" value="<%= line_item.quantity %>" id="quantity" style="width: 5rem;"> &times; <%= number_to_currency(line_item.product.price) %>
-      <button type="button" name="button" class="btn btn-primary btn-sm" id="update_quantity">  <span class='glyphicon glyphicon-refresh'></span></button>
+      <input type="text" value="<%= line_item.quantity %>" class="quantity" style="width: 5rem;"> &times; <%= number_to_currency(line_item.product.price) %>
+      <button type="button" name="<%= line_item.product.id %>" class="btn btn-primary btn-sm update_quantity">  <span class='glyphicon glyphicon-refresh'></span></button>
       <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe , line_item, method: :delete, remote: true, class: "btn btn-danger btn-sm", data: { confirm: "Cancellare questo prodotto?" } %>
     <% else %>
     <%= line_item.quantity %> &times; <%= number_to_currency(line_item.product.price) %>
