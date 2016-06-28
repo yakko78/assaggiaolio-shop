@@ -1,8 +1,8 @@
 <div class="container">
-  <h1>Carrello</h1>
   <% if @cart.line_items.present? %>
   <div class="col-md-12">
-      <table class="table">
+      <table class="table table-cart">
+        <caption>CARRELLO</caption>
         <%= render @cart.line_items, checkout: false %>
         <tr>
           <td colspan="3" style="text-align:right">Totale: <%= number_to_currency(@cart.total_price) %></td>

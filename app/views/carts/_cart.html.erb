@@ -1,36 +1,38 @@
-<h1>Carrello</h1>
-<% if cart.line_items.present? %>
 <div class="col-md-12">
-    <table class="table">
-      <%= render cart.line_items, checkout: checkout %>
-      <% if session[:temporary_shipping_cost] %>
-      <tr>
-        <td colspan="3" style="text-align:right">Spedizione: <%= number_to_currency(session[:temporary_shipping_cost]) %></td>
-      </tr>
-      <% end %>
-      <tr>
-        <td colspan="3" style="text-align:right">Totale:
-          <% if session[:temporary_shipping_cost].present? %>
-            <%= number_to_currency(cart.total_price(session[:temporary_shipping_cost])) %>
-          <% else  %>
-            <%= number_to_currency(cart.total_price) %>
+    <table class="table table-cart">
+      <caption>CARRELLO</caption>
+      <% if cart.line_items.present? %>
+        <%= render cart.line_items, checkout: checkout %>
+        <% if session[:temporary_shipping_cost] %>
+          <tr>
+            <td colspan="3" style="text-align:right">Spedizione: <%= number_to_currency(session[:temporary_shipping_cost]) %></td>
+          </tr>
           <% end %>
+        <tr>
+          <td colspan="3" class="total-price">Totale provvisorio:
+            <strong>
+            <% if session[:temporary_shipping_cost].present? %>
+              <%= number_to_currency(cart.total_price(session[:temporary_shipping_cost])) %>
+            <% else  %>
+              <%= number_to_currency(cart.total_price) %>
+            <% end %>
+            </strong>
+          </td>
+        </tr>
+      <% else %>
+      <tr class="line-item-row">
+        <td>
+          Il tuo carrello è vuoto
         </td>
       </tr>
+      <% end %>
     </table>
 </div>
-  <% if checkout.blank? %>
-  <div class="col-md-6">
-    <%= button_to "Svuota carrello", @cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-danger" %>
-  </div>
-  <div class="col-md-6">
-    <%= button_to "Vai alla cassa", @cart, method: :get, class: "btn btn-primary" %>
-  </div>
-<% end %>
-
-<% else %>
-  <div class="class-md-12">
-    Il tuo carrello è vuoto
+  <% if cart.line_items.present? && checkout.blank? %>
+  <div class="col-md-12">
+    <%= button_to "Svuota carrello", @cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-custom btn-light" %>
+    <br>
+    <%= button_to "Vai alla cassa", @cart, method: :get, class: "btn btn-custom btn-checkout" %>
   </div>
 <% end %>
 
@@ -39,8 +41,8 @@
   $(document).ready(function(){
     $('.update_quantity').click(function(){
       var id = $(this).prop('name');
-      var product_id = $('td#'+id+' > .product_id').val();
-      var quantity = $('td#'+id+' > .quantity').val();
+      var product_id = $('#'+id+' > .product_id').val();
+      var quantity = $('#'+id+' > .quantity').val();
 
       $.ajax({
         url: '/line_items/'+$(this).siblings('.product_id').val(),
