@@ -146,14 +146,16 @@
   <div class="col-md-4">
     <h2>Rivedi ordine</h2>
 
-    <div id="sidebar-cart-wrapper">
-      <%= render @cart, checkout: true %>
+    <div class="row">
+      <div id="sidebar-cart-wrapper">
+        <%= render @cart, checkout: true %>
+      </div>
     </div>
 
-    <br><br>
-    <%= link_to "Continua gli acquisti", store_url, method: :get, class: "btn btn-default" %>
+    <%= link_to "Continua gli acquisti", store_url, method: :get, class: "btn btn-custom btn-light" %>
+    &nbsp;
+    <%= c.submit 'Termina e paga', class: "btn btn-custom btn-checkout" %>
 
-    <%= c.submit 'Termina e paga', class: 'btn btn-default btn-primary' %>
 
   </div>
 

@@ -6,6 +6,9 @@
         </div>
         <div class="col-md-8">
           <h3><%= line_item.product.title %></h3>
+          <% if checkout %>
+            <%= line_item.quantity %> &times; <%= number_to_currency(line_item.product.price) %> | <strong><%= number_to_currency(line_item.total_price) %></strong>
+          <% end %>
         </div>
     </div>
     <div class="row">
@@ -13,8 +16,6 @@
         <input type="hidden" class="product_id" value="<%= line_item.product_id %>">
         <% if checkout.blank? %>
           <input type="text" value="<%= line_item.quantity %>" class="quantity" style="width: 5rem;"> &times; <%= number_to_currency(line_item.product.price) %> | <strong><%= number_to_currency(line_item.total_price) %></strong>
-          <% else %>
-          <%= line_item.quantity %> &times; <%= number_to_currency(line_item.product.price) %> | <strong><%= number_to_currency(line_item.total_price) %></strong>
         <% end %>
         <div class="pull-right">
           <% if checkout.blank? %>
