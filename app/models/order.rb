@@ -124,13 +124,7 @@ class Order < ActiveRecord::Base
       params[costo_prod_key] = costo_prod_value
       params[quantita_key] = quantita_value
     end
-
-    puts "PARAMS: #{params}"
-
-    result = Net::HTTP.post_form(URI.parse(url), params)
-
-    result
-
+    Net::HTTP.post_form(URI.parse(url), params)
   end
 
 end

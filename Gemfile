@@ -29,8 +29,6 @@ gem 'pg'
 gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 
-gem 'byebug'
-
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,6 +55,7 @@ group :development, :test do
   gem "rspec-rails"
   gem 'ffaker'
   gem "factory_girl_rails"
+  gem 'byebug'
 end
 
 group :development do
