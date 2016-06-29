@@ -30,7 +30,7 @@ class Order < ActiveRecord::Base
       cmd: "_cart",
       upload: 1,
       return: "#{Rails.application.secrets.app_host}#{return_path}",
-      invoice: id.to_s + Time.now.to_i.to_s,
+      invoice: "AO" + Time.now.to_i.to_s,
       custom: id,
       # amount: self.amount_to_pay,
       currency_code: "EUR",
@@ -81,6 +81,51 @@ class Order < ActiveRecord::Base
     finalURL = 'https://'+returnValue[1]+'?PaymentID='+returnValue[0]
 
     finalURL
+  end
+
+  def update_old_mysql_db
+    require 'uri'
+    require 'net/http'
+
+    url = "http://www.assaggiaolio.com/new_cart_hook.php"
+
+    params = {
+      firstname: self.billing_address.firstname,
+      lastname: self.billing_address.lastname,
+      address: self.billing_address.address,
+      zip: self.billing_address.zip,
+      city: self.billing_address.city,
+      province: self.billing_address.province,
+      telephone: self.billing_address.telephone,
+      email: self.billing_address.email,
+
+      shipping_cost: self.shipping_cost,
+
+      totale: self.amount_to_pay.to_s,
+      trackID: self.track_id,
+      tranID: self.transaction_id,
+      resucode: self.status
+
+      # Il vecchio paymentID non lo passo, perchè PayPal non lo restituisce
+      # L'ID della transazione (pagamento) è in tranID
+     }
+
+    self.line_items.each_with_index do |line_item, index|
+      codice_prod_key = "codice_prod_#{(index+1).to_s}"
+      codice_prod_value = line_item.product.sku
+
+      costo_prod_key = "costo_prod_#{(index+1).to_s}"
+      costo_prod_value = line_item.product.price
+
+      quantita_key = "quantita_#{(index+1).to_s}"
+      quantita_value = line_item.quantity
+
+      params[codice_prod_key] = codice_prod_value
+      params[costo_prod_key] = costo_prod_value
+      params[quantita_key] = quantita_value
+    end
+
+    Net::HTTP.post_form(URI.parse(url), params)
 
   end
 

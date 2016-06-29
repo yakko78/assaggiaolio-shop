@@ -122,7 +122,8 @@ class OrdersController < ApplicationController
      status = params[:payment_status]
      if status == "Completed"
        @order = Order.find params[:custom]
-       @order.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], purchased_at: Time.now
+       @order.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], track_id: params[:invoice], purchased_at: Time.now
+       @order.update_old_mysql_db
      end
      render nothing: true
    end
@@ -132,7 +133,8 @@ class OrdersController < ApplicationController
      result = params[:result]
      if result == "APPROVED"
        @order = Order.find params[:udf1]
-       @order.update_attributes notification_params: params, status: result, transaction_id: params[:tranid], purchased_at: Time.now
+       @order.update_attributes notification_params: params, status: result, transaction_id: params[:tranid], track_id: params[:trackid], purchased_at: Time.now
+       @order.update_old_mysql_db
        render text: "REDIRECT=#{Rails.application.secrets.app_host}/orders/#{@order.id}"
        return
      else
