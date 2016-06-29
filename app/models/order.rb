@@ -125,7 +125,9 @@ class Order < ActiveRecord::Base
       params[quantita_key] = quantita_value
     end
 
-    Net::HTTP.post_form(URI.parse(url), params)
+    result = Net::HTTP.post_form(URI.parse(url), params)
+
+    result
 
   end
 
