@@ -1,2 +1,11 @@
 es:
   price: "Precio"
+  height: "Altura"
+  capacity: "Capacidad"
+  diameter: "Diámetro"
+  add_to_cart: "Añadir al carrito"
+  info_to_customize: "Info para personalizar"
+  each: "cada"
+  qty: "CANT."
+  cart: "Carrito"
+  your_cart_is_empty: "Tu carrito está vacío"

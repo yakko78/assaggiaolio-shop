@@ -10,42 +10,42 @@
       <table class="tech-specs">
         <% if p.capacity_cl %>
         <tr>
-          <th>Capacità</th>
+          <th><%= t('capacity') %></th>
           <td><%= "cl #{p.capacity_cl} (fl. oz. #{p.capacity_floz})" %></td>
         </tr>
         <% end %>
         <% if p.height %>
         <tr>
-          <th>Altezza</th>
+          <th><%= t('height') %></th>
           <td><%= p.height %> mm</td>
         </tr>
         <% end %>
         <% if p.diameter %>
         <tr>
-          <th>Diametro</th>
+          <th><%= t('diameter') %></th>
           <td><%= p.diameter %> mm</td>
         </tr>
         <% end %>
       </table>
 
-      <%= link_to "info su personalizzazione", "", class: 'btn btn-custom btn-light' %>
+      <%= link_to t('info_to_customize'), "", class: 'btn btn-custom btn-light' %>
 
       <%= form_tag line_items_path(product_id: p), remote: true do %>
 
       <table class="price-table">
         <tr>
           <td>
-            <h3 class="price"><%= number_to_currency(p.price) %> <span class="cad"> / cad.</span></h3>
+            <h3 class="price"><%= number_to_currency(p.price) %> <span class="cad"> / <%= t('each') %></span></h3>
           </td>
           <td class="quantity-wrapper">
-            <label for="quantity">Q.TÀ</label>
+            <label for="quantity"><%= t('qty') %></label>
             <input type="number" name="quantity" value="1" min="1">
 
           </td>
         </tr>
       </table>
 
-      <%= submit_tag "Aggiungi al carrello", class: "btn btn-custom btn-add-to-cart" %>
+      <%= submit_tag t('add_to_cart'), class: "btn btn-custom btn-add-to-cart" %>
 
       <% end %>
 

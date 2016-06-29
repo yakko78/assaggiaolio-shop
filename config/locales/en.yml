@@ -21,3 +21,12 @@
 
 en:
   price: "Price"
+  height: "Height"
+  capacity: "Capacity"
+  diameter: "Diameter"
+  add_to_cart: "Add to cart"
+  info_to_customize: "Info to customize"
+  each: "each"
+  qty: "QTY."
+  cart: "Cart"
+  your_cart_is_empty: "Your cart is empty"

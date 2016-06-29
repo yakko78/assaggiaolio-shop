@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <table class="table table-cart">
-      <caption>CARRELLO</caption>
+      <caption><%= t('cart') %></caption>
       <% if cart.line_items.present? %>
         <%= render cart.line_items, checkout: checkout %>
         <% if session[:temporary_shipping_cost] %>
@@ -22,7 +22,7 @@
       <% else %>
       <tr class="line-item-row">
         <td>
-          Il tuo carrello è vuoto
+          <%= t('your_cart_is_empty') %>
         </td>
       </tr>
       <% end %>

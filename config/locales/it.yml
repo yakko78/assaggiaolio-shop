@@ -1,2 +1,11 @@
 it:
   price: "Prezzo"
+  height: "Altezza"
+  capacity: "Capacità"
+  diameter: "Diametro"
+  add_to_cart: "Aggiungi al carrello"
+  info_to_customize: "Info su personalizzazione"
+  each: "cad."
+  qty: "Q.TÀ"
+  cart: "Carrello"
+  your_cart_is_empty: "Il tuo carrello è vuoto"
