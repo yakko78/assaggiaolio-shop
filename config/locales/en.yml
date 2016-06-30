@@ -30,3 +30,6 @@ en:
   qty: "QTY."
   cart: "Cart"
   your_cart_is_empty: "Your cart is empty"
+  product_added_to_cart:
+    one: "1 product added to cart"
+    other: "%{count} products added to cart"

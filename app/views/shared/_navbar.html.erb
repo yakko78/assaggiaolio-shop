@@ -2,28 +2,30 @@
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "AssaggiaOlio Shop #{I18n.locale}", store_url, class: "navbar-brand" %>
+      <%= link_to image_tag('assaggiaolio_logo_white.png', class:'img-responsive'), store_url, class: "navbar-brand" %>
+      <div class="pull-right" style="padding-right: 15px; padding-top:12px">
+        <ul class="nav">
+          <li class="dropdown pull-left">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= image_tag "#{I18n.locale}.png", class: 'flag' %></a>
+            <ul class="dropdown-menu">
+              <% (I18n.available_locales - [I18n.locale]).each do |locale| %>
+              <li><%= link_to image_tag("#{locale}.png", class: 'flag'), change_locale_path(locale) %></li>
+              <% end %>
+            </ul>
+          </li>
+          <li class="pull-right"><%= link_to "<span class='glyphicon glyphicon-shopping-cart' style='font-size: 24px; color: #fff'></span>".html_safe, @cart %></li>
+        </ul>
+      </div>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Carrello", @cart %></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Lingua <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Italiano", change_locale_path(:it) %></li>
-            <li><%= link_to "English", change_locale_path(:en) %></li>
-            <li><%= link_to "Espanol", change_locale_path(:es) %></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
+  <div id="flash-cart">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" id="flash-cart-content">
+          <%= notice %>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </nav>

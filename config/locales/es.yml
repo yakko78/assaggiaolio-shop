@@ -9,3 +9,6 @@ es:
   qty: "CANT."
   cart: "Carrito"
   your_cart_is_empty: "Tu carrito está vacío"
+  product_added_to_cart:
+    one: "1 producto añadido al carrito"
+    other: "%{count} productos añadidos al carrito"

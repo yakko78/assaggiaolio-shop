@@ -22,12 +22,28 @@ body {
   color: $dirty_yellow !important;
 }
 
+#flash-cart {
+  position:absolute;
+  padding: 15px 0;
+  background-color: $dirty_yellow;
+  text-transform: uppercase;
+  width: 100%;
+  display: none;
+}
+
 #navbar-assaggiaolio {
   background-color: $olive_dark;
-
+  .navbar-toggle {
+    margin-top: 20px;
+  }
   .navbar-brand {
     color: #fff;
+    line-height: normal;
+    height: auto;
+    width: 180px;
   }
+.flag { width: 30px; }
+.dropdown-menu { min-width: 40px; }
 }
 
 .home-cart {
