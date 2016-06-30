@@ -35,4 +35,6 @@ es:
       proceed_to_checkout: "Tramitar pedido"
       choose_one: "Seleccionar..."
       review_your_order: "Revise su orden"
+      place_your_order: "Comprar ahora"
+      empty_cart: "Vaciar el carrito"
       subtotal: "Subtotal"

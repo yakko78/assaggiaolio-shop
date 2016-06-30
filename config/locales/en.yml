@@ -20,17 +20,25 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  number:
+    currency:
+      format:
+        unit: "€"
+        deliminter: ","
+        separator: ","
+        precision: 2
+        format: '%n %u'
   price: "Price"
   height: "Height"
   capacity: "Capacity"
   diameter: "Diameter"
-  add_to_cart: "Add to cart"
+  add_to_cart: "Add to shopping cart"
   info_to_customize: "Info to customize"
   customize_text: "For information to customize, please write to info@faravetrerie.it"
   each: "each"
   qty: "QTY."
-  cart: "Cart"
-  your_cart_is_empty: "Your cart is empty"
+  cart: "Shopping Cart"
+  your_cart_is_empty: "Your shopping cart is empty"
   product_added_to_cart:
     one: "1 product added to cart"
     other: "%{count} products added to cart"
@@ -56,4 +64,6 @@ en:
       proceed_to_checkout: "Proceed to checkout"
       choose_one: "Choose one..."
       review_your_order: "Review your order"
+      place_your_order: "Place your order"
+      empty_cart: "Empty shopping cart"
       subtotal: "Subtotal"

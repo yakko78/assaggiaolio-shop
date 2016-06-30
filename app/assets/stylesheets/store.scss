@@ -211,6 +211,14 @@ body {
 
     }
   }
+  td.cart-shipping-costs {
+    background: $dark_grey;
+    color: #FFF;
+    font-size: 1.7rem;
+    padding: 1.5rem;
+    margin: 20px 0;
+    text-align: right;
+  }
   td.total-price {
     font-size: 1.7rem;
     background-color: #fff;

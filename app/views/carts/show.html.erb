@@ -11,8 +11,9 @@
   </div>
   <div class="col-md-12">
     <div class="pull-right">
-      <%= button_to "Continua gli acquisti", store_url, method: :get, class: "btn btn-default" %>&nbsp;
-      <%= button_to "Termina e paga", new_order_path, method: :get, class: "btn btn-primary" %>
+      <%= link_to t('form.continue_shopping'), store_url, method: :get, class: "btn btn-custom btn-light" %>
+      &nbsp;
+      <%= button_to t('form.proceed_to_checkout'), new_order_path, method: :get, class: "btn btn-custom btn-checkout" %>
     </div>
   </div>
 
