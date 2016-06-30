@@ -1,62 +1,61 @@
-
 <%= simple_form_for @order, validate: true do |c| %>
 
 
   <!-- Dati Utente -->
   <div class="col-md-4">
-    <h2>I tuoi dati</h2>
+    <h2><%= t('form.billing_address') %></h2>
     <%= c.simple_fields_for :billing_address do |b| %>
     <div id="billing-address-wrapper">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <%= b.input :firstname, class: 'form-control'  %>
+            <%= b.input :firstname, label: t('form.firstname'), class: 'form-control'  %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= b.input :lastname, class: 'form-control'  %>
+            <%= b.input :lastname, label: t('form.lastname'), class: 'form-control'  %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= b.input :company, class: 'form-control' %>
+        <%= b.input :company, label: t('form.company'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= b.input :address, class: 'form-control' %>
+        <%= b.input :address, label: t('form.address'), class: 'form-control' %>
       </div>
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <%= b.input :zip, class: 'form-control' %>
+            <%= b.input :zip, label: t('form.zip'), class: 'form-control' %>
           </div>
         </div>
         <div class="col-sm-8">
           <div class="form-group">
-            <%= b.input :city, class: 'form-control' %>
+            <%= b.input :city, label: t('form.city'), class: 'form-control' %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= b.input :province, class: 'form-control' %>
+        <%= b.input :province, label: t('form.province'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= b.input :shipping_table_rate_id, label: 'Country' do %>
-          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.billing_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'billing_country_selector form-control' } %>
+        <%= b.input :shipping_table_rate_id, label: t('form.country') do %>
+          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.billing_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'billing_country_selector form-control' } %>
         <% end %>
       </div>
       <div class="form-group">
-        <%= b.input :telephone, class: 'form-control', required: false %>
+        <%= b.input :telephone, label: t('form.telephone'), class: 'form-control', required: false %>
       </div>
       <div class="form-group">
-        <%= b.input :email, class: 'form-control' %>
+        <%= b.input :email, label: t('form.email'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= b.input :vat, class: 'form-control' %>
+        <%= b.input :vat, label: t('form.vat'), class: 'form-control' %>
       </div>
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="ship_same_address" id="ship_same_address" <%= 'checked' unless @order.shipping_address.id.present?  %> > Spedire allo stesso indirizzo
+          <input type="checkbox" name="ship_same_address" id="ship_same_address" <%= 'checked' unless @order.shipping_address.id.present?  %> > <%= t('form.ship_same_address') %>
         </label>
       </div>
 
@@ -65,46 +64,49 @@
     <%= c.simple_fields_for :shipping_address do |s| %>
     <div id="shipping-address-wrapper">
       <div class="row">
+        <div class="col-sm-12">
+          <h2><%= t('form.shipping_address') %></h2>
+        </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= s.input :firstname, class: 'form-control'  %>
+            <%= s.input :firstname, label: t('form.firstname'), class: 'form-control'  %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= s.input :lastname, class: 'form-control'  %>
+            <%= s.input :lastname, label: t('form.lastname'), class: 'form-control'  %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= s.input :company, class: 'form-control' %>
+        <%= s.input :company, label: t('form.company'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= s.input :address, class: 'form-control' %>
+        <%= s.input :address, label: t('form.address'), class: 'form-control' %>
       </div>
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <%= s.input :zip, class: 'form-control' %>
+            <%= s.input :zip, label: t('form.zip'), class: 'form-control' %>
           </div>
         </div>
         <div class="col-sm-8">
           <div class="form-group">
-            <%= s.input :city, class: 'form-control' %>
+            <%= s.input :city, label: t('form.city'), class: 'form-control' %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= s.input :province, class: 'form-control' %>
+        <%= s.input :province, label: t('form.province'), class: 'form-control' %>
       </div>
       <div class="form-group">
         <%= s.input :shipping_table_rate_id, label: 'Country' do %>
-          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.shipping_address.shipping_table_rate_id), { include_blank: 'Seleziona...' }, { class: 'shipping_country_selector form-control' } %>
+          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.shipping_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'shipping_country_selector form-control' } %>
         <% end %>
       </div>
 
       <div class="form-group">
-        <%= s.input :telephone, class: 'form-control', required: false %>
+        <%= s.input :telephone, label: t('form.telephone'), class: 'form-control', required: false %>
       </div>
     </div>
     <% end %>
@@ -116,12 +118,11 @@
   <div class="col-md-4">
 
     <!-- Shipping Method -->
-    <h2>Spese di Spedizione</h2>
+    <h2><%= t('form.shipping_costs') %></h2>
     <div class="radio">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div id="shipping-costs-wrapper">
-            <%= "#{@order.billing_address.shipping_table_rate.country}: #{number_to_currency(@order.shipping_cost)}" unless @order.shipping_cost.nil? %>
           </div>
         </div>
       </div>
@@ -129,7 +130,7 @@
 
     </div>
 
-    <h2>Metodo di Pagamento</h2>
+    <h2><%= t('form.payment_method') %></h2>
 
     <div class="radio">
       <label>
@@ -138,13 +139,13 @@
     </div>
     <div class="radio">
       <label>
-        <input value="2" type="radio" name="order[pay_type]" id="order_pay_type_antani">Carta di Credito
+        <input value="2" type="radio" name="order[pay_type]" id="order_pay_type_antani"><%= t('form.credit_card') %>
       </label>
     </div>
 
   </div>
   <div class="col-md-4">
-    <h2>Rivedi ordine</h2>
+    <h2><%= t('form.review_your_order') %></h2>
 
     <div class="row">
       <div id="sidebar-cart-wrapper">
@@ -152,9 +153,9 @@
       </div>
     </div>
 
-    <%= link_to "Continua gli acquisti", store_url, method: :get, class: "btn btn-custom btn-light" %>
+    <%= link_to t('form.continue_shopping'), store_url, method: :get, class: "btn btn-custom btn-light" %>
     &nbsp;
-    <%= c.submit 'Termina e paga', class: "btn btn-custom btn-checkout" %>
+    <%= c.submit t('form.proceed_to_checkout'), class: "btn btn-custom btn-checkout" %>
 
 
   </div>

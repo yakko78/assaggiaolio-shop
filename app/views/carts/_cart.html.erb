@@ -1,6 +1,6 @@
 <div class="col-md-12">
     <table class="table table-cart">
-      <caption><%= t('cart') %></caption>
+      <%= "<caption>#{t('cart')}</caption>".html_safe unless checkout %>
       <% if cart.line_items.present? %>
         <%= render cart.line_items, checkout: checkout %>
         <% if session[:temporary_shipping_cost] %>
@@ -9,7 +9,7 @@
           </tr>
           <% end %>
         <tr>
-          <td colspan="3" class="total-price">Totale provvisorio:
+          <td colspan="3" class="total-price"><%= t('form.subtotal') %>:
             <strong>
             <% if session[:temporary_shipping_cost].present? %>
               <%= number_to_currency(cart.total_price(session[:temporary_shipping_cost])) %>

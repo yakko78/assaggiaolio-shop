@@ -13,13 +13,17 @@ $dirty_yellow: #C6B100;
 
 
 body {
-  padding-top: 7rem;
+  padding-top: 10rem;
   background-color: $olive;
   font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
 .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label  {
   color: $dirty_yellow !important;
+}
+
+.nav > li > a:hover, .nav > li > a:focus, .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  background-color: $olive;
 }
 
 #flash-cart {
@@ -29,6 +33,14 @@ body {
   text-transform: uppercase;
   width: 100%;
   display: none;
+}
+
+#shipping-costs-wrapper {
+  background: $dark_grey;
+  color: $light_grey;
+  border-radius: 3px;
+  padding: 1.3rem 2.3rem;
+  margin: 20px 0;
 }
 
 #navbar-assaggiaolio {
@@ -42,8 +54,15 @@ body {
     height: auto;
     width: 180px;
   }
-.flag { width: 30px; }
-.dropdown-menu { min-width: 40px; }
+  .navbar-header {
+    float: none;
+  }
+  .flag-cart-wrapper {
+    padding-right: 15px;
+    padding-top:12px;
+  }
+  .flag { width: 30px; }
+  .dropdown-menu { min-width: 40px; }
 }
 
 .home-cart {
@@ -88,7 +107,7 @@ body {
 
 
 .product-wrapper {
-  padding: 4rem 0;
+  padding: 2rem 0 4rem 0;
   border-bottom: 1px solid $dark_grey;
   h1 {
       padding-top: 0;
@@ -100,7 +119,7 @@ body {
   }
 
   .product-image-wrapper {
-    padding: 20px;
+    padding: 2rem;
   }
 
   p.description {
@@ -198,5 +217,16 @@ body {
     text-align: right;
     color: $olive_dark;
     padding: 1.5rem;
+  }
+}
+
+#new_order {
+  label { color: $light_grey; }
+  h2 {
+    color: #fff;
+    font-weight: 300;
+    border-bottom: 1px solid $light_grey;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 }
