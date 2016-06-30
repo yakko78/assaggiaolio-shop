@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :carts
   get 'store/index'
 
+  get 'loader' => 'store#loader'
+
   get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
 
   post "/orders/:id" => "orders#show"
