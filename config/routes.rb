@@ -10,16 +10,12 @@ Rails.application.routes.draw do
   resources :line_items
   resources :carts
   get 'store/index'
-
-  get 'loader' => 'store#loader'
-
+  
   get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
 
   post "/orders/:id" => "orders#show"
   post "/hook" => "orders#hook"
   post "/hook_triveneto" => "orders#hook_triveneto"
-
-  get "/fake" => "orders#fake"
 
   get  '/calculate_shipping/:id' => 'orders#calculate_shipping'
   get '/error' => 'orders#error'

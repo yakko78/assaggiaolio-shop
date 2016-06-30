@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     @order.build_shipping_address
     @order.shipping_address.build_shipping_table_rate
 
-    @shipping_table_rates = ShippingTableRate.all
+    @shipping_table_rates = ShippingTableRate.order(:country)
 
   end
 
