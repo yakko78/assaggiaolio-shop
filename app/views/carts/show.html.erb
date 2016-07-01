@@ -20,7 +20,14 @@
 
   <% else %>
     <div class="class-md-12">
-      Il tuo carrello è vuoto
+      <table class="table table-cart">
+        <caption>CARRELLO</caption>
+        <tr class="line-item-row">
+          <td>
+            <%= t('your_cart_is_empty') %>
+          </td>
+        </tr>
+      </table>
     </div>
   <% end %>
 

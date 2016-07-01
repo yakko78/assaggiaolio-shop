@@ -256,3 +256,13 @@ body {
     padding: 0 0 3rem;
   }
 }
+
+.cart-button {
+  display:block;
+}
+
+@media only screen and (min-width : $screen-md) {
+  .cart-button {
+    display:none !important;
+  }
+}
