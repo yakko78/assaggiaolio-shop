@@ -1,15 +1,15 @@
-<div class="col-md-12">
+<div class="col-md-6 col-md-offset-3 order-detail">
   <h1>Conferma acquisto</h1>
 
   <p>
-    Gentile cliente <br>
+    Gentile <strong><%= @order.billing_address.firstname.titleize %> <%= @order.billing_address.lastname.titleize %></strong> <br>
     ti ringraziamo per il tuo acquisto.
   </p>
 
   <p>
     Qui ti riepiloghiamo i dati del pagamento appena effettuato:
   </p>
-
+<br>
 <p>
   <strong>Importo pagato:</strong> <%= number_to_currency(@order.amount_to_pay) %><br>
   <strong>Canale di pagamento:</strong>
@@ -21,16 +21,16 @@
   <br>
   <strong>ID transazione:</strong> <%= @order.transaction_id %>
 </p>
-
-<p>Puoi consultare, stampare e archiviare il tuo ordine in formato PDF <strong>cliccando qui</strong>.</p>
-
+<br>
+<p><strong>Stampa o archivia questa email come ricevuta.</strong></p>
+<br>
 <p>Se desideri ulteriori informazioni puoi contattarci al numero +39 0571 676176
 oppure inviarci una email a <a href="mailto:info@assaggiaolio.com">info@assaggiaolio.com</a></p>
 
 <p>
 Questo messaggio è stato generato automaticamente, ti preghiamo di non rispondere.
 </p>
-
+<br>
 <p>
   Cordiali saluti <br>
 Fara Vetrerie e Cristallerie Srl

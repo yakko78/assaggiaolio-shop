@@ -34,7 +34,7 @@
   <div class="col-md-12">
     <%= button_to t('form.empty_cart'), @cart, method: :delete, data: { confirm: 'Sei sicuro di voler svuotare il carrello?' }, class: "btn btn-custom btn-light" %>
     <br>
-    <%= button_to t('form.proceed_to_checkout'), @cart, method: :get, class: "btn btn-custom btn-checkout" %>
+    <%= button_to t('form.proceed_to_checkout'), new_order_path, method: :get, class: "btn btn-custom btn-checkout" %>
   </div>
 <% end %>
 

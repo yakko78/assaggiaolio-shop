@@ -185,7 +185,7 @@ body {
 .table-cart {
   margin-bottom: 4rem;
   caption {
-    font-size: 2rem;
+    font-size: 1.7rem;
     background-color: $olive_dark;
     color: #fff;
     padding: 1.5rem;
@@ -196,7 +196,12 @@ body {
     background-color: $light_grey;
     td {
       padding: 1.5rem;
-      h3 { font-size: 1.8rem; margin-top: 0; padding-top:  1rem }
+      h3 {
+        font-size: 1.4rem;
+        margin: 0;
+        padding: 0;
+        padding-top:  1rem
+      }
       input {
         font-size: 1.3rem;
         width: 40px !important;
@@ -236,5 +241,18 @@ body {
     border-bottom: 1px solid $light_grey;
     padding-bottom: 1rem;
     margin-bottom: 2rem;
+  }
+}
+
+.order-detail {
+  padding: 3rem;
+  background-color: #fff;
+  font-size: 1.6rem;
+  h1 {
+    text-transform: uppercase;
+    font-weight: 300;
+    font-size: 3rem;
+    color: $olive;
+    padding: 0 0 3rem;
   }
 }

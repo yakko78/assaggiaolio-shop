@@ -1,3 +1,3 @@
 class Product < ActiveRecord::Base
-  translates :title, :description
+  translates :title, :description, :fallbacks_for_empty_translations => true
 end

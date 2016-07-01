@@ -7,7 +7,7 @@
     <h1>Conferma acquisto</h1>
 
     <p>
-      Gentile <%= @order.billing_address.firstname %> <%= @order.billing_address.lastname %><br>
+      Gentile <%= @order.billing_address.firstname.titleize %> <%= @order.billing_address.lastname.titleize %><br>
       ti ringraziamo per il tuo acquisto.
     </p>
 

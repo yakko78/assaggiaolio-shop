@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   get 'settings/change_locale'
 
-  resources :products
   resources :shipping_table_rates
   resources :shipping_addresses
   resources :billing_addresses
@@ -10,7 +9,7 @@ Rails.application.routes.draw do
   resources :line_items
   resources :carts
   get 'store/index'
-  
+
   get '/change_locale/:locale', to: 'settings#change_locale', as: :change_locale
 
   post "/orders/:id" => "orders#show"
@@ -19,6 +18,8 @@ Rails.application.routes.draw do
 
   get  '/calculate_shipping/:id' => 'orders#calculate_shipping'
   get '/error' => 'orders#error'
+
+  get "/thankyou", to: "orders#show"
 
   root 'store#index', as: 'store'
 

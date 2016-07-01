@@ -3,7 +3,7 @@ class UserNotifier < ApplicationMailer
 
   def send_receipt_email(order)
     @order = order
-    mail(to: @order.billing_address.email, ccn: "info@yellowtulip.it", subject: "Il tuo ordine su AssaggiaOlio")
+    mail(to: @order.billing_address.email, bcc: "info@yellowtulip.it", subject: "Il tuo ordine su AssaggiaOlio")
   end
 
 end
