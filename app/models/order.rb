@@ -31,7 +31,7 @@ class Order < ActiveRecord::Base
       upload: 1,
       return: "#{Rails.application.secrets.app_host}#{return_path}",
       invoice: "AO" + Time.now.to_i.to_s,
-      custom: id,
+      custom: "id=#{id}&locale=#{I18n.locale}",
       # amount: self.amount_to_pay,
       currency_code: "EUR",
       shipping_1: self.shipping_cost,
@@ -60,6 +60,12 @@ class Order < ActiveRecord::Base
     require 'uri'
     require 'net/http'
 
+    language = case I18n.locale
+      when :it then "ITA"
+      when :es then "ESP"
+      else "USA"
+    end
+
     params = {
       id: "11115604",
       password: "Francesco71",
@@ -67,7 +73,8 @@ class Order < ActiveRecord::Base
       amt: self.amount_to_pay.to_s,
       currencycode: "978",
       udf1: id.to_s,
-      langid: "ITA",
+      udf2: "#{I18n.locale}",
+      langid: language,
       responseURL: "#{Rails.application.secrets.app_host}/hook_triveneto",
       errorURL: "#{Rails.application.secrets.app_host}/error",
       trackid: "AO" + Time.now.to_i.to_s
@@ -96,6 +103,7 @@ class Order < ActiveRecord::Base
       zip: self.billing_address.zip,
       city: self.billing_address.city,
       province: self.billing_address.province,
+      country: self.billing_address.shipping_table_rate.country,
       telephone: self.billing_address.telephone,
       email: self.billing_address.email,
 

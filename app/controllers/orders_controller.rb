@@ -122,13 +122,18 @@ class OrdersController < ApplicationController
      params.permit! # Permit all Paypal input params
      status = params[:payment_status]
      if status == "Completed"
-       @order = Order.find params[:custom]
+
+       custom = (Rack::Utils.parse_nested_query params[:custom]).symbolize_keys
+
+       @order = Order.find custom[:id]
        @order.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], track_id: params[:invoice], purchased_at: Time.now
 
        @order.update_old_mysql_db
 
        # Invio email
-       UserNotifier.send_receipt_email(@order).deliver_now
+       I18n.with_locale custom[:locale] do
+         UserNotifier.send_receipt_email(@order).deliver_now
+       end
 
      end
      render nothing: true
@@ -143,8 +148,12 @@ class OrdersController < ApplicationController
 
        @order.update_old_mysql_db
 
+       byebug
+
        # Invio email
-       UserNotifier.send_receipt_email(@order).deliver_now
+       I18n.with_locale params[:udf2].to_sym do
+         UserNotifier.send_receipt_email(@order).deliver_now
+       end
 
        render text: "REDIRECT=#{Rails.application.secrets.app_host}/orders/#{@order.id}"
        return

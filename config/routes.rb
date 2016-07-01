@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :shipping_addresses
   resources :billing_addresses
   resources :orders
+  resources :products
   resources :line_items
   resources :carts
   get 'store/index'
