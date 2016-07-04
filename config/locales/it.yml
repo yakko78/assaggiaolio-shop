@@ -25,6 +25,7 @@ it:
       telephone: "Telefono"
       email: "Email"
       vat: "P. IVA"
+      notes: "Note"
       ship_same_address: "Spedisci allo stesso indirizzo"
       credit_card: "Carta di Credito"
       billing_address: "Indirizzo di Fatturazione"

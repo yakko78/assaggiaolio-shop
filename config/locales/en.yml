@@ -54,6 +54,7 @@ en:
       telephone: "Telephone"
       email: "Email"
       vat: "VAT No."
+      notes: "Notes"
       ship_same_address: "Ship to the same address"
       credit_card: "Credit Card"
       billing_address: "Billing Address"

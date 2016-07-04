@@ -53,6 +53,9 @@
       <div class="form-group">
         <%= b.input :vat, label: t('form.vat'), class: 'form-control' %>
       </div>
+      <div class="form-group">
+        <%= c.input :notes, label: t('form.notes'), class: 'form-control' %>
+      </div>
       <div class="checkbox">
         <label>
           <input type="checkbox" name="ship_same_address" id="ship_same_address" <%= 'checked' unless @order.shipping_address.id.present?  %> > <%= t('form.ship_same_address') %>
@@ -107,6 +110,9 @@
 
       <div class="form-group">
         <%= s.input :telephone, label: t('form.telephone'), class: 'form-control', required: false %>
+      </div>
+      <div class="form-group">
+        <%= s.input :email, label: t('form.email'), class: 'form-control' %>
       </div>
     </div>
     <% end %>
