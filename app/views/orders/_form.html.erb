@@ -103,7 +103,7 @@
         <%= s.input :province, label: t('form.province'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= s.input :shipping_table_rate_id, label: 'Country' do %>
+        <%= s.input :shipping_table_rate_id, label: t('form.country') do %>
           <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.shipping_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'shipping_country_selector form-control' } %>
         <% end %>
       </div>
