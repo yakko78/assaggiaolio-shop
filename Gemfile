@@ -24,7 +24,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'simple_form'
 
 gem 'pg'
-
+gem 'devise'
+gem 'activeadmin', github: 'activeadmin'
 
 gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
