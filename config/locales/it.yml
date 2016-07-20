@@ -1,4 +1,29 @@
 it:
+  activerecord:
+    models:
+      admin_user:
+        one: Utente Amministratore
+        other: Utenti Amministratori
+      product:
+        one: Prodotto
+        other: Prodotti
+      order:
+        one: Ordine
+        other: Ordini
+      shipping_table_rate:
+        one: Tabella Spedizioni
+        other: Tabelle Spedizioni
+    attributes:
+      product:
+        sku: Codice
+        title: Titolo
+        description: Descrizione
+        capacity_cl: Capacità (Cl)
+        capacity_floz: Capacità (Fl. oz.)
+        height: Altezza
+        diameter: Diametro
+        price: Prezzo
+        image: Immagine
   price: "Prezzo"
   height: "Altezza"
   capacity: "Capacità"
