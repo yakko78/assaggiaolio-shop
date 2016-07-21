@@ -31,6 +31,7 @@ gem 'client_side_validations'
 gem 'client_side_validations-simple_form'
 
 
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -41,6 +42,7 @@ gem 'client_side_validations-simple_form'
 # gem 'capistrano-rails', group: :development
 
 gem 'globalize', '~> 5.0.0'
+gem 'globalize-accessors'
 gem 'activeadmin-globalize', '~> 1.0.0.pre', github: 'fabn/activeadmin-globalize', branch: 'develop'
 gem 'bootstrap-sass', '~> 3.3.5.1'
 gem 'google-webfonts-rails'

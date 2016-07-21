@@ -3,6 +3,7 @@ ActiveAdmin.register Product do
   permit_params :capacity_cl, :capacity_floz, :diameter, :height, :price, translations_attributes: [:locale, :id, :title, :description, :_destroy]
 
   index do
+    selectable_column
     column :sku
     column :title
     column :description
@@ -11,7 +12,6 @@ ActiveAdmin.register Product do
     column :height
     column :diameter
     column :price
-    selectable_column
     actions
   end
 
@@ -34,6 +34,40 @@ ActiveAdmin.register Product do
     end
 
     actions
+  end
+
+  show do
+    panel "Dettagli Prodotto" do
+      attributes_table_for product do
+        row :title
+        row :description
+        row "titolo inglese" do
+          product.title_en
+        end
+        row "descrizione inglese" do
+          product.description_en
+        end
+        row "titolo spagnolo" do
+          product.title_es
+        end
+        row "descrizione spagnola" do
+          product.description_es
+        end
+      end
+    end
+
+    panel "Dati Tecnici" do
+      attributes_table_for product do
+        row  :capacity_cl
+        row  :capacity_floz
+        row  :height
+        row  :diameter
+        row  :price do
+          number_to_currency(product.price)
+        end
+      end
+    end
+
   end
 
 

@@ -41,7 +41,7 @@
       </div>
       <div class="form-group">
         <%= b.input :shipping_table_rate_id, label: t('form.country') do %>
-          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.billing_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'billing_country_selector form-control' } %>
+          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country_name', selected: @order.billing_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'billing_country_selector form-control' } %>
         <% end %>
       </div>
       <div class="form-group">
@@ -104,7 +104,7 @@
       </div>
       <div class="form-group">
         <%= s.input :shipping_table_rate_id, label: t('form.country') do %>
-          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country', selected: @order.shipping_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'shipping_country_selector form-control' } %>
+          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country_name', selected: @order.shipping_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'shipping_country_selector form-control' } %>
         <% end %>
       </div>
 

@@ -7,37 +7,36 @@
     <h1>Confirmación de Compra</h1>
 
     <p>
-      Gentile <%= @order.billing_address.firstname.titleize %> <%= @order.billing_address.lastname.titleize %><br>
-      ti ringraziamo per il tuo acquisto.
+      Estimado <%= @order.billing_address.firstname.titleize %> <%= @order.billing_address.lastname.titleize %>,<br>
+      Le agradecemos por su compra.
     </p>
 
     <p>
-      Qui ti riepiloghiamo i dati del pagamento appena effettuato:
+      A continuación se resumen los datos de pago que acaba de hacer:
     </p>
 
   <p>
-    <strong>Importo pagato:</strong> <%= number_to_currency(@order.amount_to_pay) %><br>
-    <strong>Canale di pagamento:</strong>
+    <strong>Importe pagado:</strong> <%= number_to_currency(@order.amount_to_pay) %><br>
+    <strong>Canal de pago:</strong>
     <% if @order.pay_type == "1"   %>
       PayPal
     <% elsif @order.pay_type == "2" %>
-      Carta di Credito
+      Tarjeta de Crédito
     <% end %>
     <br>
-    <strong>ID transazione:</strong> <%= @order.transaction_id %>
+    <strong>ID de transacción:</strong> <%= @order.transaction_id %>
   </p>
 
-  <p>Stampa o archivia questa email come ricevuta.</p>
+  <p>Imprimir o archivar este mensaje electrónico como recibo.</p>
 
-  <p>Se desideri ulteriori informazioni puoi contattarci al numero +39 0571 676176
-  oppure inviarci una email a <a href="mailto:info@assaggiaolio.com">info@assaggiaolio.com</a></p>
+  <p>Si desea más informaciones, nos puede llamar al +39 676 176 0571 o envíe una email a <a href="mailto:info@assaggiaolio.com">info@assaggiaolio.com</a></p>
 
   <p>
-  Questo messaggio è stato generato automaticamente, ti preghiamo di non rispondere.
+  Este mensaje se genera automáticamente, por favor, no respondan.
   </p>
 
   <p>
-    Cordiali saluti <br>
+    Saludos<br>
   Fara Vetrerie e Cristallerie Srl
   </p>
   <br>

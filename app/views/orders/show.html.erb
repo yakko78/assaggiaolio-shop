@@ -1,38 +1,35 @@
 <div class="col-md-6 col-md-offset-3 order-detail">
-  <h1>Conferma acquisto</h1>
+  <h1><%= t('order.purchase_confirmation') %></h1>
 
   <p>
-    Gentile <strong><%= @order.billing_address.firstname.titleize %> <%= @order.billing_address.lastname.titleize %></strong> <br>
-    ti ringraziamo per il tuo acquisto.
+    <%= t('order.dear') %> <strong><%= @order.billing_address.firstname.titleize %> <%= @order.billing_address.lastname.titleize %></strong>, <br>
+    <%= t('order.thank_you_purchase') %>
   </p>
 
   <p>
-    Qui ti riepiloghiamo i dati del pagamento appena effettuato:
+    <%= t('order.here_we_summarize') %>
   </p>
 <br>
 <p>
-  <strong>Importo pagato:</strong> <%= number_to_currency(@order.amount_to_pay) %><br>
-  <strong>Canale di pagamento:</strong>
+  <strong><%= t('order.amount_paid') %></strong> <%= number_to_currency(@order.amount_to_pay) %><br>
+  <strong><%= t('order.payment_channel') %></strong>
   <% if @order.pay_type == "1"   %>
     PayPal
   <% elsif @order.pay_type == "2" %>
-    Carta di Credito
+    <%= t('order.credit_card') %>
   <% end %>
   <br>
-  <strong>ID transazione:</strong> <%= @order.transaction_id %>
+  <strong><%= t('order.transaction_id') %></strong> <%= @order.transaction_id %>
 </p>
 <br>
-<p><strong>Stampa o archivia questa email come ricevuta.</strong></p>
+<p><strong><%= t('order.print_or_archive') %></strong></p>
 <br>
-<p>Se desideri ulteriori informazioni puoi contattarci al numero +39 0571 676176
-oppure inviarci una email a <a href="mailto:info@assaggiaolio.com">info@assaggiaolio.com</a></p>
+<p><%= t('order.more_info') %> <a href="mailto:info@assaggiaolio.com">info@assaggiaolio.com</a></p>
 
-<p>
-Questo messaggio è stato generato automaticamente, ti preghiamo di non rispondere.
-</p>
+<p><%= t('order.message_generated') %></p>
 <br>
 <p>
-  Cordiali saluti <br>
+  <%= t('order.best_regards') %> <br>
 Fara Vetrerie e Cristallerie Srl
 </p>
 <br>

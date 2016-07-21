@@ -120,6 +120,8 @@ GEM
     globalize (5.0.1)
       activemodel (>= 4.2.0, < 4.3)
       activerecord (>= 4.2.0, < 4.3)
+    globalize-accessors (0.2.1)
+      globalize (~> 5.0, >= 5.0.0)
     google-webfonts-rails (0.0.4)
       activesupport (> 3.2.0, < 5.0)
     has_scope (0.6.0)
@@ -289,6 +291,7 @@ DEPENDENCIES
   factory_girl_rails
   ffaker
   globalize (~> 5.0.0)
+  globalize-accessors
   google-webfonts-rails
   jbuilder (~> 2.0)
   jquery-rails

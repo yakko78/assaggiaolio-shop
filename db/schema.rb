@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160719141651) do
+ActiveRecord::Schema.define(version: 20160721124632) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,8 +91,8 @@ ActiveRecord::Schema.define(version: 20160719141651) do
 
   create_table "orders", force: :cascade do |t|
     t.string   "pay_type"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.decimal  "shipping_cost"
     t.text     "notification_params"
     t.string   "status"
@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 20160719141651) do
     t.datetime "purchased_at"
     t.string   "track_id"
     t.text     "notes"
+    t.boolean  "processed",           default: false, null: false
   end
 
   create_table "product_translations", force: :cascade do |t|
@@ -151,14 +152,14 @@ ActiveRecord::Schema.define(version: 20160719141651) do
   add_index "shipping_addresses", ["shipping_table_rate_id"], name: "index_shipping_addresses_on_shipping_table_rate_id", using: :btree
 
   create_table "shipping_table_rates", force: :cascade do |t|
-    t.string   "country"
+    t.string   "country_name"
     t.decimal  "a"
     t.decimal  "b"
     t.decimal  "c"
     t.decimal  "d"
     t.decimal  "e"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
 end

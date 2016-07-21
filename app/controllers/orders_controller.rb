@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
     @order.build_shipping_address
     @order.shipping_address.build_shipping_table_rate
 
-    @shipping_table_rates = ShippingTableRate.order(:country)
+    @shipping_table_rates = ShippingTableRate.order(:country_name)
 
   end
 
@@ -111,7 +111,7 @@ class OrdersController < ApplicationController
     @temporary_shipping_cost = @cart.calculate_shipping_cost(shipping_table_rate_id)
     session[:temporary_shipping_cost] = @temporary_shipping_cost
     shipping_table_rate = ShippingTableRate.find(shipping_table_rate_id)
-    @new_country = shipping_table_rate.country
+    @new_country = shipping_table_rate.country_name
 
     respond_to do |format|
         format.js
@@ -128,7 +128,7 @@ class OrdersController < ApplicationController
        @order = Order.find custom[:id]
        @order.update_attributes notification_params: params, status: status, transaction_id: params[:txn_id], track_id: params[:invoice], purchased_at: Time.now
 
-       @order.update_old_mysql_db
+      #  @order.update_old_mysql_db
 
        # Invio email
        I18n.with_locale custom[:locale] do
@@ -146,9 +146,7 @@ class OrdersController < ApplicationController
        @order = Order.find params[:udf1]
        @order.update_attributes notification_params: params, status: result, transaction_id: params[:tranid], track_id: params[:trackid], purchased_at: Time.now
 
-       @order.update_old_mysql_db
-
-       byebug
+      #  @order.update_old_mysql_db
 
        # Invio email
        I18n.with_locale params[:udf2].to_sym do

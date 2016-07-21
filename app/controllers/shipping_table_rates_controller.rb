@@ -69,6 +69,6 @@ class ShippingTableRatesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shipping_table_rate_params
-      params.require(:shipping_table_rate).permit(:country, :a, :b, :c, :d, :e)
+      params.require(:shipping_table_rate).permit(:country_name, :a, :b, :c, :d, :e)
     end
 end
