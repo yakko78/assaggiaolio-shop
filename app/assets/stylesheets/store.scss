@@ -80,7 +80,6 @@ body {
   font-weight: 600;
   letter-spacing: 1px;
   width: 100%;
-
   // &.btn-add-to-cart {
   //   background-color: $dark_grey;
   //   color: $light_grey;
@@ -101,6 +100,8 @@ body {
     background-color: $dirty_yellow;
     border: 1px solid $dirty_yellow;
     color: $olive;
+    box-shadow: none !important;
+
   }
 
 }
