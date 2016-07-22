@@ -2,6 +2,7 @@ ActiveAdmin.register Order do
   before_filter :skip_sidebar!, :only => :index
 
   permit_params :processed
+  actions :all, :except => [:new]
 
   scope "Evasi", :was_processed
   scope "Non evasi", :was_not_processed
