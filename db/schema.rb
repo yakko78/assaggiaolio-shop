@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160721124632) do
+ActiveRecord::Schema.define(version: 20160722110807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20160721124632) do
     t.string   "track_id"
     t.text     "notes"
     t.boolean  "processed",           default: false, null: false
+    t.decimal  "total",               default: 0.0,   null: false
   end
 
   create_table "product_translations", force: :cascade do |t|

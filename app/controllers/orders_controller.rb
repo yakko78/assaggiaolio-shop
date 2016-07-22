@@ -61,6 +61,7 @@ class OrdersController < ApplicationController
     end
 
     @order.add_line_items_from_cart(@cart)
+    @order.total = @order.amount_to_pay
 
     respond_to do |format|
       if @order.save
@@ -173,7 +174,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:pay_type, :shipping_cost, :notes, :ship_same_address, billing_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email, :vat, :order_id, :cart_id], shipping_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email])
+      params.require(:order).permit(:pay_type, :total, :shipping_cost, :notes, :ship_same_address, billing_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email, :vat, :order_id, :cart_id], shipping_address_attributes: [:firstname, :lastname, :company, :address, :zip, :city, :province, :shipping_table_rate_id, :telephone, :email])
       # params.require(:order).permit(:pay_type)
     end
 end

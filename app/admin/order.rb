@@ -5,7 +5,7 @@ ActiveAdmin.register Order do
 
   scope "Evasi", :was_processed
   scope "Non evasi", :was_not_processed
-  scope "Tutti", :all
+  scope "Tutti", :all, default: true
 
   form do |f|
 
@@ -27,7 +27,7 @@ ActiveAdmin.register Order do
       "#{order.billing_address.firstname.titleize} #{order.billing_address.lastname.titleize}"
     end
     column "Totale" do |order|
-      number_to_currency(order.amount_to_pay)
+      number_to_currency(order.total)
     end
     column "Evaso", :processed
     actions
