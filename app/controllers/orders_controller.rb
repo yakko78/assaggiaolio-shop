@@ -65,6 +65,15 @@ protect_from_forgery except: [:hook, :hook_triveneto]
     @order.add_line_items_from_cart(@cart)
     @order.total = @order.amount_to_pay
 
+    # Se il pagamento con Consorzio Triveneto fallisce, non mi viene ritornato
+    # l'ID dell'ordine fallito (così da poterlo cancellare). L'unico modo è
+    # contrassegnare a priori un ordine Triveneto come NON PAGATO. Se il pagamento
+    # fallisce, rimane comunque contrassegnato.
+
+    if @order.pay_type == "2" #Carta di Credito
+      @order.status = "ORDINE NON VALIDO - Pagamento non ricevuto"
+    end
+
     respond_to do |format|
       if @order.save
 
@@ -146,6 +155,7 @@ protect_from_forgery except: [:hook, :hook_triveneto]
    def hook_triveneto
      params.permit! # Permit all Consorzio Triveneto input params
      result = params[:result]
+
      if result == "APPROVED"
        @order = Order.find params[:udf1]
        @order.update_attributes notification_params: params, status: result, transaction_id: params[:tranid], track_id: params[:trackid], purchased_at: Time.now
@@ -160,9 +170,11 @@ protect_from_forgery except: [:hook, :hook_triveneto]
        render text: "REDIRECT=#{Rails.application.secrets.app_host}/orders/#{@order.id}"
        return
      else
-       respond_to do |format|
-         format.html { redirect_to "/error" }
-       end
+
+       # SE LO STATUS È ERRORE, cancella l'ordine
+       render nothing: true
+       # meglio sarebbe
+       # head 200
      end
    end
 

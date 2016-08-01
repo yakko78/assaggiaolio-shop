@@ -262,6 +262,11 @@ body {
   display:block;
 }
 
+.error-wrapper {
+  background-color: #fff;
+  padding: 1rem 2rem;
+}
+
 @media only screen and (min-width : $screen-md) {
   .cart-button {
     display:none !important;
