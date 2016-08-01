@@ -82,3 +82,6 @@ en:
     more_info: "If you want more information, you can call us on +39 0571 676176 or send an email to"
     message_generated: "This message was automatically generated, please do not respond."
     best_regards: "Best regards"
+    error_title: "An error has occurred"
+    error_body: "There was a problem with your payment. <strong>No amount has been paid.</strong><br>Please try again with a new order."
+    back_to_shop: "Back to shop main page"

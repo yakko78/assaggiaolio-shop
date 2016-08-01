@@ -1,8 +1,7 @@
 <div class="col-md-12 error-wrapper">
-  <h1>Si è verificato un errore</h1>
+  <h1><%= t('order.error_title') %></h1>
   <p>
-    Si è verificato un errore col tuo pagamento. <strong>Nessun importo è stato addebitato.</strong> <br>
-    Ti invitiamo a effettuare di nuovo l'ordine a riprovare
+    <%= t('order.error_body').html_safe %>
   </p>
-  <%= link_to "Torna al negozio", store_url, class: "btn btn-custom btn-add-to-cart pull-left" %>
+  <%= link_to t('order.back_to_shop'), store_url, class: "btn btn-custom btn-add-to-cart pull-left" %>
 </div>

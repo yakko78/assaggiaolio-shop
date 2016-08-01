@@ -78,3 +78,6 @@ it:
     more_info: "Se desideri ulteriori informazioni puoi contattarci al numero +39 0571 676176 oppure inviarci una email a"
     message_generated: "Questo messaggio è stato generato automaticamente, ti preghiamo di non rispondere."
     best_regards: "Cordiali saluti"
+    error_title: "Si è verificato un errore"
+    error_body: "Si è verificato un errore col tuo pagamento. <strong>Nessun importo è stato addebitato.</strong><br>Ti invitiamo a effettuare di nuovo l'ordine a riprovare"
+    back_to_shop: "Torna al negozio"
