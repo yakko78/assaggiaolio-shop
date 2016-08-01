@@ -37,28 +37,3 @@
     <%= button_to t('form.proceed_to_checkout'), new_order_path, method: :get, class: "btn btn-custom btn-checkout" %>
   </div>
 <% end %>
-
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('.update_quantity').click(function(){
-      var id = $(this).prop('name');
-      var product_id = $('#'+id+' > .product_id').val();
-      var quantity = $('#'+id+' > .quantity').val();
-
-      $.ajax({
-        url: '/line_items/'+$(this).siblings('.product_id').val(),
-        method: 'patch',
-        data: {
-          "product_id": product_id,
-          "quantity": quantity
-        }
-      });
-
-    });
-  });
-
-  // "product_id": $(this).prev('.product_id').val(),
-  // "quantity": $(this).prev('.quantity').val()
-
-</script>

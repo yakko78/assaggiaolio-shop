@@ -1,35 +1,6 @@
-<div class="container">
-  <% if @cart.line_items.present? %>
-  <div class="col-md-12">
-      <table class="table table-cart">
-        <caption>CARRELLO</caption>
-        <%= render @cart.line_items, checkout: false %>
-        <tr>
-          <td colspan="3" style="text-align:right">Totale: <%= number_to_currency(@cart.total_price) %></td>
-        </tr>
-      </table>
-  </div>
-  <div class="col-md-12">
-    <div class="pull-right">
-      <%= link_to t('form.continue_shopping'), store_url, method: :get, class: "btn btn-custom btn-light" %>
-      &nbsp;
-      <%= button_to t('form.proceed_to_checkout'), new_order_path, method: :get, class: "btn btn-custom btn-checkout" %>
-    </div>
-  </div>
+<div class="container" id="sidebar-cart-wrapper">
 
-
-  <% else %>
-    <div class="class-md-12">
-      <table class="table table-cart">
-        <caption>CARRELLO</caption>
-        <tr class="line-item-row">
-          <td>
-            <%= t('your_cart_is_empty') %>
-          </td>
-        </tr>
-      </table>
-    </div>
-  <% end %>
+  <%= render @cart, checkout: false %>
 
 
 </div>

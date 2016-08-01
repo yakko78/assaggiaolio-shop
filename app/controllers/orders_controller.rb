@@ -3,7 +3,9 @@ class OrdersController < ApplicationController
   before_action :set_cart, only: [:new, :create, :calculate_shipping]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
-  protect_from_forgery except: [:hook, :hook_triveneto]
+  # protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }, except: [:hook, :hook_triveneto]
+
+protect_from_forgery except: [:hook, :hook_triveneto]
 
   # GET /orders
   # GET /orders.json
@@ -122,6 +124,7 @@ class OrdersController < ApplicationController
   def hook
      params.permit! # Permit all Paypal input params
      status = params[:payment_status]
+
      if status == "Completed"
 
        custom = (Rack::Utils.parse_nested_query params[:custom]).symbolize_keys
