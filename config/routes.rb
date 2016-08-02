@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   root 'store#index', as: 'store'
 
+  get '/.well-known/acme-challenge/:id' => 'store#letsencrypt'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.
