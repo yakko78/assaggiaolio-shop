@@ -1,5 +1,5 @@
 class UserNotifier < ApplicationMailer
-  default :from => 'AssaggiaOlio <info@assaggiaolio.com>'
+  default :from => 'AssaggiaOlio <info@faravetrerie.it>'
 
   def send_receipt_email(order)
     @order = order
