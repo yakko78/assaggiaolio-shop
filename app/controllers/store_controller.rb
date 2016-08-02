@@ -9,6 +9,6 @@ class StoreController < ApplicationController
 
   def letsencrypt
     # use your code here, not mine
-    render text: "GZyYG5ixjqA2J5Qiyl-ri00bBK7yjhsjTVHMfzl5sX0"
+    render text: "1df1ob5ZkaLDnBaxnZPGlBYNjCU5XaVNFmSQIwPGwew.DTNxc1VFqVzjRFhtq7PqStHcbqJBVNeRnA1kJqIZdxw"
   end
 end
