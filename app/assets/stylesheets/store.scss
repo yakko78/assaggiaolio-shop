@@ -312,9 +312,17 @@ footer {
   padding: 4rem 0;
   color: $light_grey;
 
+  .logo {
+    padding-bottom: 3rem;
+  }
+
   .legalnotes {
     padding: 1rem 0;
     font-size: 1.1rem;
+  }
+
+  .social-wrapper {
+    padding-top: 3rem;
   }
 
 }
