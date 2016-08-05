@@ -81,3 +81,4 @@ it:
     error_title: "Si è verificato un errore"
     error_body: "Si è verificato un errore col tuo pagamento. <strong>Nessun importo è stato addebitato.</strong><br>Ti invitiamo a effettuare di nuovo l'ordine a riprovare"
     back_to_shop: "Torna al negozio"
+  follow_us_on: "Seguici su"

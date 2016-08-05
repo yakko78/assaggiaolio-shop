@@ -1,4 +1,4 @@
-<div class="product-wrapper">
+<div class="product-wrapper <%= "last" unless last.nil? %>">
   <div class="row">
     <div class="col-md-4 product-image-wrapper">
       <%= image_tag p.image, class: 'img-responsive' unless p.image.nil? %>

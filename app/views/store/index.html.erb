@@ -1,6 +1,9 @@
 <div class="col-md-8">
   <% @products.each do |p| %>
-    <%= render "products/product", p: p %>
+    <% if p == @products.last %>
+      <% last = true %>
+    <% end %>
+    <%= render "products/product", p: p, last: last %>
   <% end %>
 </div>
 <div class="col-md-4">
