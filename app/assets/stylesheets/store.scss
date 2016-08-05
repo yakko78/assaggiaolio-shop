@@ -32,6 +32,12 @@ html, body {
   position: absolute;
 }
 
+.field_with_errors {
+  label.message {
+    color: $dirty_yellow !important;
+  }
+}
+
 body {
   padding-top: 10rem;
   background-color: $olive;
