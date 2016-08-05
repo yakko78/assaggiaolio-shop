@@ -44,7 +44,7 @@ class Order < ActiveRecord::Base
       shipping_1: self.shipping_cost,
       notify_url: "#{Rails.application.secrets.app_host}/hook"
     }
-    
+
     self.line_items.each_with_index do |line_item, index|
       item_name_key = "item_name_#{(index+1).to_s}"
       item_name_value = line_item.product.title

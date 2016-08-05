@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/termini-e-condizioni', to: 'pages#termsconditions'
   get '/garanzia', to: 'pages#warranty'
   get '/metodi-di-pagamento', to: 'pages#paymentmethods'
+  get '/test', to: 'pages#test'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

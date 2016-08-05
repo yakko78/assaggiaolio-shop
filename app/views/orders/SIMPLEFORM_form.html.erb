@@ -1,71 +1,60 @@
-<%= form_for @order, html: { autocomplete: 'off' }, validate: true do |c| %>
+<%= simple_form_for @order, html: { autocomplete: 'off' }, validate: true do |c| %>
 
 
   <!-- Dati Utente -->
   <div class="col-md-4">
     <h2><%= t('form.billing_address') %></h2>
-    <%= c.fields_for :billing_address do |b| %>
+    <%= c.simple_fields_for :billing_address do |b| %>
     <div id="billing-address-wrapper">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <%= b.label t('form.firstname') %>
-            <%= b.text_field :firstname, class: 'form-control'  %>
+            <%= b.input :firstname, label: t('form.firstname'), class: 'form-control'  %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= b.label t('form.lastname') %>
-            <%= b.text_field :lastname, class: 'form-control'  %>
+            <%= b.input :lastname, label: t('form.lastname'), class: 'form-control'  %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= b.label t('form.company') %>
-        <%= b.text_field :company, class: 'form-control' %>
+        <%= b.input :company, label: t('form.company'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= b.label t('form.address') %>
-        <%= b.text_field :address, class: 'form-control' %>
+        <%= b.input :address, label: t('form.address'), class: 'form-control' %>
       </div>
       <div class="row">
         <div class="col-sm-4">
-          <div class="form-group"><
-            <%= b.label t('form.zip') %>
-            <%= b.text_field :zip, class: 'form-control' %>
+          <div class="form-group">
+            <%= b.input :zip, label: t('form.zip'), class: 'form-control' %>
           </div>
         </div>
         <div class="col-sm-8">
           <div class="form-group">
-            <%= b.label t('form.city') %>
-            <%= b.text_field :city, class: 'form-control' %>
+            <%= b.input :city, label: t('form.city'), class: 'form-control' %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= b.label t('form.province') %>
-        <%= b.text_field :province, class: 'form-control' %>
+        <%= b.input :province, label: t('form.province'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= b.label t('form.country') %>
-        <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country_name', selected: @order.billing_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'billing_country_selector form-control' } %>
-
+        <%= b.input :shipping_table_rate_id, label: t('form.country') do %>
+          <%= b.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country_name', selected: @order.billing_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'billing_country_selector form-control' } %>
+        <% end %>
       </div>
       <div class="form-group">
-        <%= b.label t('form.telephone') %>
-        <%= b.text_field :telephone, class: 'form-control', required: false %>
+        <%= b.input :telephone, label: t('form.telephone'), class: 'form-control', required: false %>
       </div>
       <div class="form-group">
-        <%= b.label t('form.email') %>
-        <%= b.text_field :email, class: 'form-control' %>
+        <%= b.input :email, label: t('form.email'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= b.label t('form.vat') %>
-        <%= b.text_field :vat, class: 'form-control' %>
+        <%= b.input :vat, label: t('form.vat'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= c.label t('form.notes') %>
-        <%= c.text_area :notes, class: 'form-control' %>
+        <%= c.input :notes, label: t('form.notes'), class: 'form-control' %>
       </div>
       <div class="checkbox">
         <label>
@@ -75,8 +64,7 @@
 
     </div>
     <% end %>
-
-    <%= c.fields_for :shipping_address do |s| %>
+    <%= c.simple_fields_for :shipping_address do |s| %>
     <div id="shipping-address-wrapper">
       <div class="row">
         <div class="col-sm-12">
@@ -84,58 +72,51 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= s.label t('form.firstname') %>
-            <%= s.text_field :firstname, class: 'form-control'  %>
+            <%= s.input :firstname, label: t('form.firstname'), class: 'form-control'  %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= s.label t('form.lastname') %>
-            <%= s.text_field :lastname, class: 'form-control'  %>
+            <%= s.input :lastname, label: t('form.lastname'), class: 'form-control'  %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= s.label t('form.company') %>
-        <%= s.text_field :company, class: 'form-control' %>
+        <%= s.input :company, label: t('form.company'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= s.label t('form.address') %>
-        <%= s.text_field :address, class: 'form-control' %>
+        <%= s.input :address, label: t('form.address'), class: 'form-control' %>
       </div>
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <%= s.label t('form.zip') %>
-            <%= s.text_field :zip, class: 'form-control' %>
+            <%= s.input :zip, label: t('form.zip'), class: 'form-control' %>
           </div>
         </div>
         <div class="col-sm-8">
           <div class="form-group">
-            <%= s.label t('form.city') %>
-            <%= s.text_field :city, class: 'form-control' %>
+            <%= s.input :city, label: t('form.city'), class: 'form-control' %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= s.label t('form.province') %>
-        <%= s.text_field :province, class: 'form-control' %>
+        <%= s.input :province, label: t('form.province'), class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= s.label t('form.country') %>
-        <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country_name', selected: @order.shipping_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'shipping_country_selector form-control' } %>
+        <%= s.input :shipping_table_rate_id, label: t('form.country') do %>
+          <%= s.select :shipping_table_rate_id, options_from_collection_for_select(@shipping_table_rates, 'id', 'country_name', selected: @order.shipping_address.shipping_table_rate_id), { include_blank: t('form.choose_one') }, { class: 'shipping_country_selector form-control' } %>
+        <% end %>
       </div>
 
       <div class="form-group">
-        <%= s.label t('form.telephone') %>
-        <%= s.text_field :telephone, class: 'form-control', required: false %>
+        <%= s.input :telephone, label: t('form.telephone'), class: 'form-control', required: false %>
       </div>
       <div class="form-group">
-        <%= s.label t('form.email') %>
-        <%= s.text_field :email, class: 'form-control' %>
+        <%= s.input :email, label: t('form.email'), class: 'form-control' %>
       </div>
     </div>
     <% end %>
+
 
 
   </div>

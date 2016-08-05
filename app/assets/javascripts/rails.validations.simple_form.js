@@ -1,6 +1,6 @@
 
 /*!
- * Client Side Validations - SimpleForm - v3.2.3 (https://github.com/DavyJonesLocker/client_side_validations-simple_form)
+ * Client Side Validations - SimpleForm - v3.2.4 (https://github.com/DavyJonesLocker/client_side_validations-simple_form)
  * Copyright (c) 2016 Geremia Taglialatela, Brian Cardarella
  * Licensed under MIT (http://opensource.org/licenses/mit-license.php)
  */
@@ -8,17 +8,20 @@
 (function() {
   ClientSideValidations.formBuilders['SimpleForm::FormBuilder'] = {
     add: function(element, settings, message) {
-      return this.wrappers[settings.wrapper].add.call(this, element, settings, message);
+      return this.wrapper(settings.wrapper).add.call(this, element, settings, message);
     },
     remove: function(element, settings) {
-      return this.wrappers[settings.wrapper].remove.call(this, element, settings);
+      return this.wrapper(settings.wrapper).remove.call(this, element, settings);
+    },
+    wrapper: function(name) {
+      return this.wrappers[name] || this.wrappers["default"];
     },
     wrappers: {
       "default": {
         add: function(element, settings, message) {
           var errorElement, wrapper;
           wrapper = element.closest(settings.wrapper_tag + "." + (settings.wrapper_class.replace(/\ /g, '.')));
-          errorElement = wrapper.find(settings.error_tag + "." + settings.error_class);
+          errorElement = wrapper.find(settings.error_tag + "." + (settings.error_class.replace(/\ /g, '.')));
           if (!errorElement.length) {
             errorElement = $("<" + settings.error_tag + "/>", {
               "class": settings.error_class,
@@ -32,18 +35,12 @@
         remove: function(element, settings) {
           var errorElement, wrapper;
           wrapper = element.closest(settings.wrapper_tag + "." + (settings.wrapper_class.replace(/\ /g, '.')) + "." + settings.wrapper_error_class);
-          errorElement = wrapper.find(settings.error_tag + "." + settings.error_class);
+          errorElement = wrapper.find(settings.error_tag + "." + (settings.error_class.replace(/\ /g, '.')));
           wrapper.removeClass(settings.wrapper_error_class);
           return errorElement.remove();
         }
       }
     }
   };
-
-  ClientSideValidations.formBuilders['SimpleForm::FormBuilder'].wrappers.vertical_form = ClientSideValidations.formBuilders['SimpleForm::FormBuilder'].wrappers["default"];
-
-  ClientSideValidations.formBuilders['SimpleForm::FormBuilder'].wrappers.horizontal_form = ClientSideValidations.formBuilders['SimpleForm::FormBuilder'].wrappers["default"];
-
-  ClientSideValidations.formBuilders['SimpleForm::FormBuilder'].wrappers.inline_form = ClientSideValidations.formBuilders['SimpleForm::FormBuilder'].wrappers["default"];
 
 }).call(this);

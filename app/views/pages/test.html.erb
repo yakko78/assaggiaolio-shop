@@ -1,0 +1,12 @@
+<div class="readable-text">
+  <div class="col-md-12">
+
+    <%= form_for @order, validate: true do |order|%>
+      <%= order.fields_for :billing_address do |ba| %>
+        <%= ba.text_field :firstname %>
+      <% end %>
+      <%= order.submit %>
+    <% end %>
+
+  </div>
+</div>
