@@ -7,10 +7,4 @@ class PagesController < ApplicationController
 
   def paymentmethods
   end
-
-  def test
-    @order = Order.new
-    @order.build_billing_address
-    # @order = BillingAddress.new
-  end
 end

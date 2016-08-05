@@ -21,7 +21,7 @@ html, body {
 }
 
 #content {
-  padding-bottom: 160px;
+  padding-bottom: 200px;
 }
 
 #footer {
@@ -44,9 +44,9 @@ body {
   font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
-.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label  {
-  color: $dirty_yellow !important;
-}
+// .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label  {
+//   color: $dirty_yellow !important;
+// }
 
 .nav > li > a:hover, .nav > li > a:focus, .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: $olive;

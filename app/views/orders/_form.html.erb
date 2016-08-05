@@ -9,41 +9,41 @@
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <%= b.label t('form.firstname') %>
+            <%= b.label :firstname, t('form.firstname') %>
             <%= b.text_field :firstname, class: 'form-control'  %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= b.label t('form.lastname') %>
+            <%= b.label :lastname, t('form.lastname') %>
             <%= b.text_field :lastname, class: 'form-control'  %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= b.label t('form.company') %>
+        <%= b.label :company, t('form.company') %>
         <%= b.text_field :company, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= b.label t('form.address') %>
+        <%= b.label :address, t('form.address') %>
         <%= b.text_field :address, class: 'form-control' %>
       </div>
       <div class="row">
         <div class="col-sm-4">
-          <div class="form-group"><
-            <%= b.label t('form.zip') %>
+          <div class="form-group">
+            <%= b.label :zip, t('form.zip') %>
             <%= b.text_field :zip, class: 'form-control' %>
           </div>
         </div>
         <div class="col-sm-8">
           <div class="form-group">
-            <%= b.label t('form.city') %>
+            <%= b.label :city, t('form.city') %>
             <%= b.text_field :city, class: 'form-control' %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= b.label t('form.province') %>
+        <%= b.label :province, t('form.province') %>
         <%= b.text_field :province, class: 'form-control' %>
       </div>
       <div class="form-group">
@@ -52,19 +52,19 @@
 
       </div>
       <div class="form-group">
-        <%= b.label t('form.telephone') %>
+        <%= b.label :telephone, t('form.telephone') %>
         <%= b.text_field :telephone, class: 'form-control', required: false %>
       </div>
       <div class="form-group">
-        <%= b.label t('form.email') %>
+        <%= b.label :email, t('form.email') %>
         <%= b.text_field :email, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= b.label t('form.vat') %>
+        <%= b.label :vat, t('form.vat') %>
         <%= b.text_field :vat, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= c.label t('form.notes') %>
+        <%= c.label :notes, t('form.notes') %>
         <%= c.text_area :notes, class: 'form-control' %>
       </div>
       <div class="checkbox">
@@ -84,41 +84,41 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= s.label t('form.firstname') %>
+            <%= s.label :firstname, t('form.firstname') %>
             <%= s.text_field :firstname, class: 'form-control'  %>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <%= s.label t('form.lastname') %>
+            <%= s.label :lastname, t('form.lastname') %>
             <%= s.text_field :lastname, class: 'form-control'  %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= s.label t('form.company') %>
+        <%= s.label :company, t('form.company') %>
         <%= s.text_field :company, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= s.label t('form.address') %>
+        <%= s.label :address, t('form.address') %>
         <%= s.text_field :address, class: 'form-control' %>
       </div>
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
-            <%= s.label t('form.zip') %>
+            <%= s.label :zip, t('form.zip') %>
             <%= s.text_field :zip, class: 'form-control' %>
           </div>
         </div>
         <div class="col-sm-8">
           <div class="form-group">
-            <%= s.label t('form.city') %>
+            <%= s.label :city, t('form.city') %>
             <%= s.text_field :city, class: 'form-control' %>
           </div>
         </div>
       </div>
       <div class="form-group">
-        <%= s.label t('form.province') %>
+        <%= s.label :province, t('form.province') %>
         <%= s.text_field :province, class: 'form-control' %>
       </div>
       <div class="form-group">
@@ -127,11 +127,11 @@
       </div>
 
       <div class="form-group">
-        <%= s.label t('form.telephone') %>
+        <%= s.label :telephone, t('form.telephone') %>
         <%= s.text_field :telephone, class: 'form-control', required: false %>
       </div>
       <div class="form-group">
-        <%= s.label t('form.email') %>
+        <%= s.label :email, t('form.email') %>
         <%= s.text_field :email, class: 'form-control' %>
       </div>
     </div>
