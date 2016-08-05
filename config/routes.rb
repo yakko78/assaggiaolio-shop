@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get '/termini-e-condizioni', to: 'pages#termsconditions'
+  get '/garanzia', to: 'pages#warranty'
+  get '/metodi-di-pagamento', to: 'pages#paymentmethods'
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   get 'settings/change_locale'
