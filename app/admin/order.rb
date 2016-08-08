@@ -37,15 +37,24 @@ ActiveAdmin.register Order do
   sidebar "Dettagli Cliente", :only => :show do
     table_for order do
       column "Indirizzo di fatturazione" do |o|
-        "
+        composedString = "
           #{o.billing_address.firstname.titleize} #{o.billing_address.lastname.titleize} <br>
           #{o.billing_address.address.titleize}<br>
           #{o.billing_address.zip} #{o.billing_address.city.titleize}<br>
           #{o.billing_address.province.titleize}<br>
           #{o.billing_address.shipping_table_rate.country_name}<br><br>
-          P.IVA: #{o.billing_address.vat}
+
+          Email: #{o.billing_address.email}<br>
+          Tel. #{o.billing_address.telephone}
 
         ".html_safe
+
+        if o.billing_address.vat?
+          composedString += "<br><br>P.IVA: #{o.billing_address.vat}".html_safe
+        end
+
+        composedString
+
       end
     end
     table_for order do
@@ -55,7 +64,10 @@ ActiveAdmin.register Order do
           #{o.shipping_address.address.titleize}<br>
           #{o.shipping_address.zip} #{o.shipping_address.city.titleize}<br>
           #{o.shipping_address.province.titleize}<br>
-          #{o.shipping_address.shipping_table_rate.country_name}
+          #{o.shipping_address.shipping_table_rate.country_name}<br><br>
+
+          Email: #{o.billing_address.email}<br>
+          Tel. #{o.billing_address.telephone}
 
         ".html_safe
       end
