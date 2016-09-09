@@ -66,8 +66,8 @@ ActiveAdmin.register Order do
           #{o.shipping_address.province.titleize}<br>
           #{o.shipping_address.shipping_table_rate.country_name}<br><br>
 
-          Email: #{o.billing_address.email}<br>
-          Tel. #{o.billing_address.telephone}
+          Email: #{o.shipping_address.email}<br>
+          Tel. #{o.shipping_address.telephone}
 
         ".html_safe
       end
