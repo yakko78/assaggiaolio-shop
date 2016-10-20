@@ -6,9 +6,4 @@ class StoreController < ApplicationController
     session[:temporary_shipping_cost] = nil
     @products = Product.all
   end
-
-  def letsencrypt
-    # use your code here, not mine
-    render text: "1df1ob5ZkaLDnBaxnZPGlBYNjCU5XaVNFmSQIwPGwew.DTNxc1VFqVzjRFhtq7PqStHcbqJBVNeRnA1kJqIZdxw"
-  end
 end
